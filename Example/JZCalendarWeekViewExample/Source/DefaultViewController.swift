@@ -90,7 +90,7 @@ extension DefaultViewController: OptionsViewDelegate {
     }
 
     private func getSelectedData() -> OptionsSelectedData {
-        let numOfDays = calendarWeekView.numOfDays!
+        let numOfDays = calendarWeekView.numOfDays
         let firstDayOfWeek = numOfDays == 7 ? calendarWeekView.firstDayOfWeek : nil
         viewModel.currentSelectedData = OptionsSelectedData(viewType: .defaultView,
                                                             date: calendarWeekView.initDate.add(component: .day, value: numOfDays),

@@ -188,7 +188,7 @@ open class JZBaseWeekView: UIView {
                             setDate: Date,
                             allEvents: [Date: [JZBaseEvent]],
                             scrollType: JZScrollType = .pageScroll,
-                            firstDayOfWeek: DayOfWeek = .Sunday,
+                            firstDayOfWeek: DayOfWeek? = .Sunday,
                             currentTimelineType: JZCurrentTimelineType = .section,
                             visibleTime: Date = Date(),
                             scrollableRange: (startDate: Date?, endDate: Date?)? = (nil, nil)) {

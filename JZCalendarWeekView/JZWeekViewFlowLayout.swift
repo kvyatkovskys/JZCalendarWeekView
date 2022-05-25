@@ -96,14 +96,12 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         if isPeekView {
             return ZoomConfiguration.ZoomLevel.max.value.height
         }
-        guard let configuration = SharedData.configurationsZoom.first(where: { $0.userId == UserManager.shared.loggedInUser?.userId }) else {
-            return ZoomConfiguration.ZoomLevel.default.value.height
-        }
-        
-        return configuration.zoomLevel.value.height
+        return currentZoom.value.height
     }
     
     var isPeekView: Bool = false
+    
+    public var currentZoom = ZoomConfiguration.ZoomLevel.default
     
     private var numberOfDivisions: Int {
         let hourInMinutes = 60
@@ -175,6 +173,9 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     private func initializeMinuteTick() {
         minuteTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             self?.minuteTick()
+        }
+        if let timer = minuteTimer {
+            RunLoop.current.add(timer, forMode: .common)
         }
     }
 
@@ -399,7 +400,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView,
               let resCount = delegate?.collectionView(collectionView, resourceCountWithLayout: self) else { return }
         
-        var attributes =  UICollectionViewLayoutAttributes()
+        var attributes =  UICollectionViewLayoutAttributesResource()
         var sectionItemAttributes = [UICollectionViewLayoutAttributesResource]()
 
         for item in 0..<collectionView.numberOfItems(inSection: section) {
@@ -428,7 +429,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             let resourceOffset = (subsectionWidth * CGFloat(itemResourceIndex)).toDecimal1Value()
-            let itemMinX = (sectionX + itemMargin.left).toDecimal1Value()
+            let itemMinX = (sectionX + itemMargin.left + resourceOffset).toDecimal1Value()
             let itemMinY = (startHourY + startMinuteY + calendarStartY + itemMargin.top).toDecimal1Value()
             let itemMaxX = (itemMinX + (sectionWidth - (itemMargin.left + itemMargin.right))).toDecimal1Value()
             let itemMaxY = (endHourY + endMinuteY + calendarStartY - itemMargin.bottom).toDecimal1Value()

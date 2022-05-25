@@ -9,6 +9,14 @@
 import UIKit
 import JZCalendarWeekView
 
+extension UIApplication {
+
+    var activeWindow: UIWindow? {
+        windows.first(where: { $0.isKeyWindow })
+    }
+    
+}
+
 protocol OptionsViewDelegate: AnyObject {
     func finishUpdate(selectedData: OptionsSelectedData)
 }
@@ -89,7 +97,7 @@ class ExampleOptionsViewController: UIViewController {
                 vc = mainStoryboard.instantiateViewController(withIdentifier: LongPressViewController.className)
                 (vc as? LongPressViewController)?.viewModel.currentSelectedData = selectedData
             }
-            (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.viewControllers = [vc]
+            (UIApplication.shared.activeWindow?.rootViewController as? UINavigationController)?.viewControllers = [vc]
             self.dismiss(animated: true, completion: nil)
             return
         }

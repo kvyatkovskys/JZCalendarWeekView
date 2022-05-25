@@ -21,13 +21,8 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var intraEndDate: Date
     public var resourceIndex: Int?
     
-    var appointmentRequest: AppointmentRequestItem?
-    var appointment: PracticeAppServices.Appointment?
-    var status: PracticeAppServices.Status?
-   
-    var title: String {
-        appointment?.type?.description ?? ""
-    }
+    var appointmentRequest: Any?
+    var appointment: Any?
     
     var isAppointmentRequestItemEvent: Bool {
         appointmentRequest != nil
@@ -40,14 +35,12 @@ open class JZBaseEvent: NSObject, NSCopying {
     public init(id: String = "",
                 startDate: Date,
                 endDate: Date,
-                appointment: PracticeAppServices.Appointment? = nil,
                 resourceIndex: Int? = nil) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
         self.intraStartDate = startDate
         self.intraEndDate = endDate
-        self.appointment = appointment
         self.resourceIndex = resourceIndex
     }
 
