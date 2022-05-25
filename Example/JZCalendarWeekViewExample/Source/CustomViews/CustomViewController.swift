@@ -19,7 +19,6 @@ class CustomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupBasic()
         setupCalendarView()
         setupNaviBar()
     }
@@ -69,11 +68,6 @@ extension CustomViewController: JZBaseViewDelegate {
 
 // For example only
 extension CustomViewController: OptionsViewDelegate {
-
-    func setupBasic() {
-        // Add this to fix lower than iOS11 problems
-        self.automaticallyAdjustsScrollViewInsets = false
-    }
 
     private func setupNaviBar() {
         updateNaviBarTitle()

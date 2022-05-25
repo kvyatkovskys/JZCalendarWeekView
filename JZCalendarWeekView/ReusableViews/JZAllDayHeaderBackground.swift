@@ -12,7 +12,8 @@ open class JZAllDayHeaderBackground: UICollectionReusableView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-
+        isOpaque = true
+        layer.isDoubleSided = false
         self.clipsToBounds = true
         self.backgroundColor = .white
         setupBottomDivider()
@@ -26,7 +27,10 @@ open class JZAllDayHeaderBackground: UICollectionReusableView {
         let bottomDivider = UIView()
         bottomDivider.backgroundColor = JZWeekViewColors.gridLine
         addSubview(bottomDivider)
-        bottomDivider.setAnchorConstraintsEqualTo(heightAnchor: 0.5, bottomAnchor: (bottomAnchor, 0), leadingAnchor: (leadingAnchor, 0), trailingAnchor: (trailingAnchor, 0))
+        bottomDivider.setAnchorConstraintsEqualTo(heightAnchor: 0.5,
+                                                  bottomAnchor: (bottomAnchor, 0),
+                                                  leadingAnchor: (leadingAnchor, 0),
+                                                  trailingAnchor: (trailingAnchor, 0))
     }
 
 }

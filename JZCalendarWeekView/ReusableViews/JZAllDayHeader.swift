@@ -19,7 +19,8 @@ open class JZAllDayHeader: UICollectionReusableView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-
+        isOpaque = true
+        layer.isDoubleSided = false
         setupBasic()
     }
 
@@ -35,8 +36,11 @@ open class JZAllDayHeader: UICollectionReusableView {
 
     private func setupScrollView() {
         self.addSubview(scrollView)
-        scrollView.setAnchorConstraintsEqualTo(topAnchor: (topAnchor, scrollViewPadding), leadingAnchor: (leadingAnchor, scrollViewPadding), trailingAnchor: (trailingAnchor, -scrollViewPadding))
-        let scrollViewBotCons = scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -scrollViewPadding)
+        scrollView.setAnchorConstraintsEqualTo(topAnchor: (topAnchor, scrollViewPadding),
+                                               leadingAnchor: (leadingAnchor, scrollViewPadding),
+                                               trailingAnchor: (trailingAnchor, -scrollViewPadding))
+        let scrollViewBotCons = scrollView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                                                   constant: -scrollViewPadding)
         scrollViewBotCons.priority = .defaultHigh
         scrollViewBotCons.isActive = true
     }

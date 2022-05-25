@@ -13,7 +13,9 @@ open class JZRowHeaderBackground: UICollectionReusableView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
-
+        isOpaque = true
+        layer.isDoubleSided = false
+        
     }
 
     required public init?(coder aDecoder: NSCoder) {

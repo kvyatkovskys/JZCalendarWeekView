@@ -14,7 +14,8 @@ open class JZAllDayCorner: UICollectionReusableView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-
+        isOpaque = true
+        layer.isDoubleSided = false
         setupUI()
         setupBottomDivider()
     }

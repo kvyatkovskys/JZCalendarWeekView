@@ -14,6 +14,7 @@ public enum JZSupplementaryViewKinds {
     public static let allDayHeader = JZAllDayHeader.className
     public static let eventCell = "eventCell"
     public static let currentTimeline = "currentTimeline"
+    public static let placeholderEvent = JZPlaceholderEvent.className
 }
 
 public enum JZDecorationViewKinds {
@@ -23,6 +24,9 @@ public enum JZDecorationViewKinds {
     public static let allDayCorner = JZAllDayCorner.className
     public static let verticalGridline = "VerticalGridline"
     public static let horizontalGridline = "HorizontalGridline"
+    public static let outscreenCell = "OutscreenCell"
+    public static let restrictedArea = "RestrictedArea"
+    public static let rowHeaderDivider = JZRowDividerHorizontalHeader.className
 }
 
 /// For checking scrollView(collectionView) currently scrolling direction
@@ -135,7 +139,7 @@ open class JZWeekViewHelper {
     ///   - weekView: the JZWeekView
     open class func viewTransitionHandler(to size: CGSize, weekView: JZBaseWeekView, needRefresh: Bool = true) {
         if hasNotch {
-            let flowLayout = weekView.flowLayout!
+            let flowLayout = weekView.flowLayout
             // Not differentiate the left and right because of willTransition cannot get the following UIDeviceOrientation
             let isLandscape = size.width > size.height
             flowLayout.rowHeaderWidth = isLandscape ? flowLayout.defaultRowHeaderWidth + CGFloat(32) : flowLayout.defaultRowHeaderWidth

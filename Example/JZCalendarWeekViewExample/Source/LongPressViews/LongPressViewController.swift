@@ -17,7 +17,6 @@ class LongPressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupBasic()
         setupCalendarView()
         setupNaviBar()
     }
@@ -106,11 +105,6 @@ extension LongPressViewController: JZLongPressViewDelegate, JZLongPressViewDataS
 
 // For example only
 extension LongPressViewController: OptionsViewDelegate {
-
-    func setupBasic() {
-        // Add this to fix lower than iOS11 problems
-        self.automaticallyAdjustsScrollViewInsets = false
-    }
 
     private func setupNaviBar() {
         updateNaviBarTitle()

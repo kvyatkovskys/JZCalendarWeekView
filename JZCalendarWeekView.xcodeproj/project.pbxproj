@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,6 +36,15 @@
 		8EF7EBCD20A55C8E00D5CEEA /* JZAllDayCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF7EBCC20A55C8E00D5CEEA /* JZAllDayCorner.swift */; };
 		8EF7EBCF20A55CF900D5CEEA /* JZAllDayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF7EBCE20A55CF900D5CEEA /* JZAllDayHeader.swift */; };
 		8EF7EBD120A55D1000D5CEEA /* JZAllDayHeaderBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF7EBD020A55D1000D5CEEA /* JZAllDayHeaderBackground.swift */; };
+		F9561531283E1D860005DD6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F9561530283E1D860005DD6F /* SnapKit */; };
+		F9561535283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561534283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift */; };
+		F9561537283E21330005DD6F /* JZPlaceholderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */; };
+		F9561539283E217F0005DD6F /* JZRestrictedAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561538283E217F0005DD6F /* JZRestrictedAreaView.swift */; };
+		F956153B283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956153A283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift */; };
+		F956153D283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956153C283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift */; };
+		F956153F283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956153E283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift */; };
+		F9561541283E3E230005DD6F /* JZStyleLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561540283E3E230005DD6F /* JZStyleLayoutAttributes.swift */; };
+		F9561543283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561542283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +90,14 @@
 		8EF7EBCC20A55C8E00D5CEEA /* JZAllDayCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZAllDayCorner.swift; sourceTree = "<group>"; };
 		8EF7EBCE20A55CF900D5CEEA /* JZAllDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZAllDayHeader.swift; sourceTree = "<group>"; };
 		8EF7EBD020A55D1000D5CEEA /* JZAllDayHeaderBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZAllDayHeaderBackground.swift; sourceTree = "<group>"; };
+		F9561534283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZOutsideCellDecorationView.swift; sourceTree = "<group>"; };
+		F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZPlaceholderEvent.swift; sourceTree = "<group>"; };
+		F9561538283E217F0005DD6F /* JZRestrictedAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZRestrictedAreaView.swift; sourceTree = "<group>"; };
+		F956153A283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZRowDeviderHorizontalHeader.swift; sourceTree = "<group>"; };
+		F956153C283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZDividerLayoutAttributes.swift; sourceTree = "<group>"; };
+		F956153E283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZPlaceholderLayoutAttributes.swift; sourceTree = "<group>"; };
+		F9561540283E3E230005DD6F /* JZStyleLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZStyleLayoutAttributes.swift; sourceTree = "<group>"; };
+		F9561542283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZTemplatesLayoutAttributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9561531283E1D860005DD6F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +176,10 @@
 				8E023C85206C956F00C523BE /* JZWeekViewColors.swift */,
 				8E478FA220846A8000668F05 /* Extensions.swift */,
 				8EEB40D9214B8DDE0027D45E /* WeakTimer.swift */,
+				F956153C283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift */,
+				F956153E283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift */,
+				F9561540283E3E230005DD6F /* JZStyleLayoutAttributes.swift */,
+				F9561542283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -166,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				8E1BA95F206B4B84007BE13C /* JZColumnHeader.swift */,
+				F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */,
+				F9561534283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift */,
 				8E1BA961206B4B99007BE13C /* JZRowHeader.swift */,
 				8E1BA963206B4E82007BE13C /* JZCornerHeader.swift */,
 				8E1BA965206B4F0B007BE13C /* JZGridLine.swift */,
@@ -176,6 +200,8 @@
 				8EF7EBCC20A55C8E00D5CEEA /* JZAllDayCorner.swift */,
 				8EF7EBCE20A55CF900D5CEEA /* JZAllDayHeader.swift */,
 				8EF7EBD020A55D1000D5CEEA /* JZAllDayHeaderBackground.swift */,
+				F9561538283E217F0005DD6F /* JZRestrictedAreaView.swift */,
+				F956153A283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -227,6 +253,9 @@
 			dependencies = (
 			);
 			name = JZCalendarWeekView;
+			packageProductDependencies = (
+				F9561530283E1D860005DD6F /* SnapKit */,
+			);
 			productName = JZCalendarView;
 			productReference = 8E1BA94A206B4329007BE13C /* JZCalendarWeekView.framework */;
 			productType = "com.apple.product-type.framework";
@@ -238,7 +267,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = "Jeff Zhang";
 				TargetAttributes = {
 					8E023C74206C6E4B00C523BE = {
@@ -261,6 +290,9 @@
 				Base,
 			);
 			mainGroup = 8E1BA940206B4329007BE13C;
+			packageReferences = (
+				F956152F283E1D860005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 8E1BA94B206B4329007BE13C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -327,6 +359,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E99A0A22134E84800415071 /* JZCollectionView.swift in Sources */,
+				F956153D283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift in Sources */,
+				F956153F283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift in Sources */,
 				8EEB40DA214B8DDE0027D45E /* WeakTimer.swift in Sources */,
 				8E1BA96C206B5B3F007BE13C /* JZColumnHeaderBackground.swift in Sources */,
 				8E478FA320846A8000668F05 /* Extensions.swift in Sources */,
@@ -335,9 +369,13 @@
 				8E1BA95B206B4826007BE13C /* JZWeekViewFlowLayout.swift in Sources */,
 				8E40B2E020B65C4600FFEB68 /* JZAllDayEvent.swift in Sources */,
 				8E1BA968206B4F40007BE13C /* JZCurrentTimelineSection.swift in Sources */,
+				F956153B283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift in Sources */,
 				8E1BA960206B4B84007BE13C /* JZColumnHeader.swift in Sources */,
 				8E023C84206C732300C523BE /* JZBaseEvent.swift in Sources */,
 				8E1BA964206B4E82007BE13C /* JZCornerHeader.swift in Sources */,
+				F9561541283E3E230005DD6F /* JZStyleLayoutAttributes.swift in Sources */,
+				F9561543283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift in Sources */,
+				F9561537283E21330005DD6F /* JZPlaceholderEvent.swift in Sources */,
 				8E1BA96E206B5B55007BE13C /* JZRowHeaderBackground.swift in Sources */,
 				8EF7EBCD20A55C8E00D5CEEA /* JZAllDayCorner.swift in Sources */,
 				8E1BA972206B61B7007BE13C /* JZLongPressEventCell.swift in Sources */,
@@ -345,7 +383,9 @@
 				8E1BA957206B47DA007BE13C /* JZBaseWeekView.swift in Sources */,
 				8E21E8B020916A96002D72D0 /* JZLongPressWeekView.swift in Sources */,
 				8EF7EBD120A55D1000D5CEEA /* JZAllDayHeaderBackground.swift in Sources */,
+				F9561535283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift in Sources */,
 				8E023C86206C956F00C523BE /* JZWeekViewColors.swift in Sources */,
+				F9561539283E217F0005DD6F /* JZRestrictedAreaView.swift in Sources */,
 				8E1BA96A206B5350007BE13C /* JZWeekViewHelper.swift in Sources */,
 				8E1BA962206B4B99007BE13C /* JZRowHeader.swift in Sources */,
 			);
@@ -368,7 +408,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XRYH9M2JN7;
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjfjack.JZCalendarWeekViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -382,7 +426,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XRYH9M2JN7;
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjfjack.JZCalendarWeekViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -415,6 +463,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -441,7 +490,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -477,6 +526,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -497,10 +547,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -520,8 +571,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = JZCalendarWeekView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjfjack.JZCalendarWeekView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -544,8 +599,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = JZCalendarWeekView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjfjack.JZCalendarWeekView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -585,6 +644,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F956152F283E1D860005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F9561530283E1D860005DD6F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F956152F283E1D860005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8E1BA941206B4329007BE13C /* Project object */;
 }

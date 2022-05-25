@@ -16,15 +16,22 @@ open class JZCurrentTimelinePage: UICollectionReusableView {
 
     public override init(frame: CGRect) {
         super.init(frame: .zero)
-
+        isOpaque = true
+        layer.isDoubleSided = false
         setupUI()
     }
 
     open func setupUI() {
-        self.addSubviews([ballView, lineView])
-        ballView.setAnchorCenterVerticallyTo(view: self, widthAnchor: ballSize, heightAnchor: ballSize, leadingAnchor: (leadingAnchor, 2))
-        lineView.setAnchorCenterVerticallyTo(view: self, heightAnchor: 1, leadingAnchor: (leadingAnchor, 0), trailingAnchor: (trailingAnchor, 0))
-
+        addSubviews([ballView, lineView])
+        ballView.snp.remakeConstraints {
+            $0.left.equalToSuperview().offset(2)
+            $0.size.equalTo(ballSize)
+        }
+        lineView.snp.remakeConstraints {
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         ballView.backgroundColor = JZWeekViewColors.appleCalendarRed
         ballView.layer.cornerRadius = ballSize/2
         ballView.isHidden = true

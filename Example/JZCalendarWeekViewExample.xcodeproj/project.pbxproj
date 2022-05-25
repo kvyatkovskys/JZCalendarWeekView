@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,7 @@
 		8EC8A46C209999A2002C7634 /* LongPressEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EC8A46A209999A2002C7634 /* LongPressEventCell.xib */; };
 		8EE28FBF20882DE900C69A77 /* JZCalendarWeekView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE28FBB20882D7A00C69A77 /* JZCalendarWeekView.framework */; };
 		8EE28FC020882DE900C69A77 /* JZCalendarWeekView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE28FBB20882D7A00C69A77 /* JZCalendarWeekView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F956152B283E1D240005DD6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F956152A283E1D240005DD6F /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EE28FBF20882DE900C69A77 /* JZCalendarWeekView.framework in Frameworks */,
+				F956152B283E1D240005DD6F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +264,9 @@
 				8EE28FC220882DE900C69A77 /* PBXTargetDependency */,
 			);
 			name = JZCalendarWeekViewExample;
+			packageProductDependencies = (
+				F956152A283E1D240005DD6F /* SnapKit */,
+			);
 			productName = JZCalendarViewExample;
 			productReference = 8E5BB3CE2072F4A000FA853F /* JZCalendarWeekViewExample.app */;
 			productType = "com.apple.product-type.application";
@@ -273,7 +278,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = "Jeff Zhang";
 				TargetAttributes = {
 					8E5BB3CD2072F4A000FA853F = {
@@ -292,6 +297,9 @@
 				Base,
 			);
 			mainGroup = 8E5BB3C52072F4A000FA853F;
+			packageReferences = (
+				F9561529283E1D240005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 8E5BB3CF2072F4A000FA853F /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -426,6 +434,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -451,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -485,6 +494,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -504,10 +514,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -520,8 +531,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XRYH9M2JN7;
 				INFOPLIST_FILE = "$(SRCROOT)/JZCalendarWeekViewExample/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjfjack.JZCalendarWeekViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -537,8 +551,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XRYH9M2JN7;
 				INFOPLIST_FILE = "$(SRCROOT)/JZCalendarWeekViewExample/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjfjack.JZCalendarWeekViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -568,6 +585,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F9561529283E1D240005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F956152A283E1D240005DD6F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9561529283E1D240005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8E5BB3C62072F4A000FA853F /* Project object */;
 }

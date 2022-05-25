@@ -20,6 +20,8 @@ open class JZColumnHeader: UICollectionReusableView {
         super.init(frame: .zero)
         setupUI()
         backgroundColor = .clear
+        isOpaque = true
+        layer.isDoubleSided = false
     }
 
     required public init?(coder aDecoder: NSCoder) {
