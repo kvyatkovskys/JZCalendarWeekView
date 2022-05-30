@@ -45,6 +45,7 @@
 		F956153F283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956153E283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift */; };
 		F9561541283E3E230005DD6F /* JZStyleLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561540283E3E230005DD6F /* JZStyleLayoutAttributes.swift */; };
 		F9561543283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561542283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift */; };
+		F9BC40582844E61C0060A33F /* JZCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BC40572844E61C0060A33F /* JZCalendarModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		F956153E283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZPlaceholderLayoutAttributes.swift; sourceTree = "<group>"; };
 		F9561540283E3E230005DD6F /* JZStyleLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZStyleLayoutAttributes.swift; sourceTree = "<group>"; };
 		F9561542283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZTemplatesLayoutAttributes.swift; sourceTree = "<group>"; };
+		F9BC40572844E61C0060A33F /* JZCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZCalendarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				F956153E283E3DFD0005DD6F /* JZPlaceholderLayoutAttributes.swift */,
 				F9561540283E3E230005DD6F /* JZStyleLayoutAttributes.swift */,
 				F9561542283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift */,
+				F9BC40572844E61C0060A33F /* JZCalendarModel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				F9561541283E3E230005DD6F /* JZStyleLayoutAttributes.swift in Sources */,
 				F9561543283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift in Sources */,
 				F9561537283E21330005DD6F /* JZPlaceholderEvent.swift in Sources */,
+				F9BC40582844E61C0060A33F /* JZCalendarModel.swift in Sources */,
 				8E1BA96E206B5B55007BE13C /* JZRowHeaderBackground.swift in Sources */,
 				8EF7EBCD20A55C8E00D5CEEA /* JZAllDayCorner.swift in Sources */,
 				8E1BA972206B61B7007BE13C /* JZLongPressEventCell.swift in Sources */,

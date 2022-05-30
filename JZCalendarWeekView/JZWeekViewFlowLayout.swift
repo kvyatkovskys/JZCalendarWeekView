@@ -99,8 +99,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         return currentZoom.value.height
     }
     
-    var isPeekView: Bool = false
-    
+    public var isPeekView: Bool = false
     public var currentZoom = ZoomConfiguration.ZoomLevel.default
     
     private var numberOfDivisions: Int {
@@ -997,11 +996,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
                                                              animated: animated)
     }
     
-    enum ScrollPosition {
-        case top
-        case centerVertically
-    }
-    
     open func timeForRowHeader(at indexPath: IndexPath) -> Date {
         var components = daysForSection(indexPath.section)
         components.hour = indexPath.item
@@ -1148,21 +1142,6 @@ extension JZWeekViewFlowLayout {
 
 // MARK: - restricted areas
 extension JZWeekViewFlowLayout {
-
-    public struct RestrictedArea: Hashable, Equatable {
-        var timeRange: Range<TimeInterval>
-        var title: String?
-        var backgroundColor: UIColor?
-        var isUnavailability: Bool?
-        var isScheduleTemplate: Bool?
-        var locationId: Int?
-
-        func updated(timeRange: Range<TimeInterval>) -> RestrictedArea {
-            var item = self
-            item.timeRange = timeRange
-            return item
-        }
-    }
 
     private func setupRestrictedAreasDecorations() {
         register(JZRestrictedAreaView.self, forDecorationViewOfKind: JZDecorationViewKinds.restrictedArea)

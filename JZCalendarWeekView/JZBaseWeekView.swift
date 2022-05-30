@@ -220,6 +220,12 @@ open class JZBaseWeekView: UIView {
             }
         }
     }
+    
+    open func setupCalendarEvents(allEvents: [Date: [JZBaseEvent]]) {
+        allEventsBySection = allEvents
+        layoutSubviews()
+        forceReload(reloadEvents: allEvents)
+    }
 
     open func setupAllDayEvents() {
         notAllDayEventsBySection.removeAll()

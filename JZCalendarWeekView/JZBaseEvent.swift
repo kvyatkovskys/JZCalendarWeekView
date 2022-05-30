@@ -23,6 +23,7 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var resourceIndex: Int?
     public var appointmentRequest: Any?
     public var appointment: Any?
+    public var status: Any?
     
     public var isAppointmentRequestItemEvent: Bool {
         appointmentRequest != nil
