@@ -42,6 +42,12 @@ open class JZBaseWeekView: UIView {
         }
     }
     
+    public var zoom = ZoomConfiguration.ZoomLevel.default {
+        didSet {
+            flowLayout.currentZoom = zoom
+        }
+    }
+    
     public var flowLayout: JZWeekViewFlowLayout = {
         let layout = JZWeekViewFlowLayout()
         return layout

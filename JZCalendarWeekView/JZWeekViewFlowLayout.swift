@@ -82,6 +82,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     var registeredDecorationClasses = [String: AnyClass]()
     var needsToPopulateAttributesForAllSections = true
 
+    var currentZoom = ZoomConfiguration.ZoomLevel.default
     var timelineType: TimelineConfiguration.TimelineType = .full
     var didRestrictScrollOffset: ((JZBaseWeekView.RestrictOffsetY?) -> Void)?
     
@@ -100,7 +101,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     public var isPeekView: Bool = false
-    public var currentZoom = ZoomConfiguration.ZoomLevel.default
     
     private var numberOfDivisions: Int {
         let hourInMinutes = 60
