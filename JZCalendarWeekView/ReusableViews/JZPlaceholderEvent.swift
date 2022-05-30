@@ -8,7 +8,7 @@ import UIKit
 
 open class JZPlaceholderEvent: UICollectionReusableView {
 
-    var didTap: (() -> Void)?
+    public var didTap: (() -> Void)?
 
     public override init(frame: CGRect) {
         super.init(frame: frame)

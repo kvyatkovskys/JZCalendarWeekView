@@ -97,7 +97,7 @@ open class JZBaseWeekView: UIView {
         frame.width - flowLayout.rowHeaderWidth - flowLayout.contentsMargin.left - flowLayout.contentsMargin.right
     }
     private var isFirstAppear: Bool = true
-    internal var isAllDaySupported: Bool = false
+    public var isAllDaySupported: Bool = false
     internal var scrollDirection: ScrollDirection?
 
     // Scrollable Range
@@ -462,10 +462,6 @@ open class JZBaseWeekView: UIView {
         let time = getDateForPointY(point.y)
         return yearMonthDay.set(hour: time.hour, minute: time.minute, second: 0)
     }
-}
-
-// MARK: - UICollectionViewDataSource
-extension JZBaseWeekView: UICollectionViewDataSource {
     
     open func collectionView(_ collectionView: UICollectionView, colorForOutsideScreenDecorationViewAt indexPath: IndexPath) -> UIColor? {
         // Override if needed in subclass
@@ -481,6 +477,11 @@ extension JZBaseWeekView: UICollectionViewDataSource {
         // Override if needed in subclass
         return 0
     }
+    
+}
+
+// MARK: - UICollectionViewDataSource
+extension JZBaseWeekView: UICollectionViewDataSource {
     
     // In order to keep efficiency, only 3 pages exist at the same time, previous-current-next
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
