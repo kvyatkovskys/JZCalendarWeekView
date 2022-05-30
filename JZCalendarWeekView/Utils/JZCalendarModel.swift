@@ -60,7 +60,7 @@ final public class ZoomConfiguration: NSObject, NSCoding {
     public let userId: Int
     public let zoomLevel: ZoomLevel
 
-    init(userId: Int, zoomLevel: ZoomLevel) {
+    public init(userId: Int, zoomLevel: ZoomLevel) {
         self.userId = userId
         self.zoomLevel = zoomLevel
         super.init()
@@ -132,7 +132,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
     public let userId: Int
     public let timelineType: TimelineType
 
-    init(userId: Int, timelineType: TimelineType) {
+    public init(userId: Int, timelineType: TimelineType) {
         self.userId = userId
         self.timelineType = timelineType
         super.init()
