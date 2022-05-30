@@ -19,16 +19,16 @@ open class JZBaseEvent: NSObject, NSCopying {
     // eg. startDate = 2018.03.29 14:00 endDate = 2018.03.30 03:00, then two events should be generated: 1. 0329 14:00 - 23:59(IntraEnd) 2. 0330 00:00(IntraStart) - 03:00
     public var intraStartDate: Date
     public var intraEndDate: Date
+    /// index of selected provider
     public var resourceIndex: Int?
+    public var appointmentRequest: Any?
+    public var appointment: Any?
     
-    var appointmentRequest: Any?
-    var appointment: Any?
-    
-    var isAppointmentRequestItemEvent: Bool {
+    public var isAppointmentRequestItemEvent: Bool {
         appointmentRequest != nil
     }
     
-    var isAppointmentEvent: Bool {
+    public var isAppointmentEvent: Bool {
         appointment != nil
     }
 
@@ -51,7 +51,7 @@ open class JZBaseEvent: NSObject, NSCopying {
     }
 }
 
-extension JZBaseEvent {
+public extension JZBaseEvent {
     
     var stubImage: UIImage? {
         UIImage(named: "background_request")

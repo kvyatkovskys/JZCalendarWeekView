@@ -467,17 +467,17 @@ open class JZBaseWeekView: UIView {
 // MARK: - UICollectionViewDataSource
 extension JZBaseWeekView: UICollectionViewDataSource {
     
-    public func collectionView(_ collectionView: UICollectionView, colorForOutsideScreenDecorationViewAt indexPath: IndexPath) -> UIColor? {
+    open func collectionView(_ collectionView: UICollectionView, colorForOutsideScreenDecorationViewAt indexPath: IndexPath) -> UIColor? {
         // Override if needed in subclass
         return nil
     }
     
-    public func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<JZWeekViewFlowLayout.RestrictedArea>? {
+    open func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<JZWeekViewFlowLayout.RestrictedArea>? {
         // Override if needed in subclass
         return nil
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfRestrictedLinesIn section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfRestrictedLinesIn section: Int) -> Int {
         // Override if needed in subclass
         return 0
     }
