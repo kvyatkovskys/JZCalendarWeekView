@@ -320,7 +320,7 @@ open class JZBaseWeekView: UIView {
     /// The vertical animated scroll method is *scrollWeekView(to time: Date)*.
     /// - Parameters:
     ///    - date: this date is the current date in one-day view rather than initDate
-    open func updateWeekView(to date: Date) {
+    open func updateWeekView(to date: Date, scrollToTime: Bool = false) {
         currentDate = date
         initDate = date.startOfDay.add(component: .day, value: -numOfDays)
         
