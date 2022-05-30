@@ -9,7 +9,7 @@
 import UIKit
 
 extension NSObject {
-    static var className: String {
+    static var classID: String {
         return String(describing: self)
     }
 }
