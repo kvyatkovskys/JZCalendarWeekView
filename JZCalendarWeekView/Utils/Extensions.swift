@@ -8,10 +8,12 @@
 
 import UIKit
 
-extension NSObject {
-    static var classID: String {
-        return String(describing: self)
+public extension NSObject {
+    
+    static var className: String {
+        String(describing: self)
     }
+    
 }
 
 extension Collection {

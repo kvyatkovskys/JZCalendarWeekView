@@ -203,7 +203,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
 
     public func registerDecorationViews(_ viewClasses: [UICollectionReusableView.Type]) {
         viewClasses.forEach {
-            self.register($0, forDecorationViewOfKind: $0.classID)
+            self.register($0, forDecorationViewOfKind: $0.className)
         }
     }
 
