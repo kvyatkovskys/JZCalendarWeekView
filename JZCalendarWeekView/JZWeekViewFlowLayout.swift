@@ -38,7 +38,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
 
     // UI params
     var hourHeight: CGFloat!
-    var rowHeaderWidth: CGFloat!
+    public var rowHeaderWidth: CGFloat!
     var columnHeaderHeight: CGFloat!
     var allDayHeaderHeight: CGFloat = 0
     public var sectionWidth: CGFloat!

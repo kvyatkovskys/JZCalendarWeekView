@@ -179,6 +179,22 @@ extension UILabel {
 }
 
 public extension Date {
+    
+    func add(component: Calendar.Component, value: Int) -> Date {
+        return Calendar.current.date(byAdding: component, value: value, to: self)!
+    }
+
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+
+    var endOfDay: Date {
+        return self.set(hour: 23, minute: 59, second: 59)
+    }
+    
+}
+
+extension Date {
 
     var isToday: Bool {
         return Calendar.current.isDateInToday(self)
@@ -200,18 +216,6 @@ public extension Date {
         let weekdays = calendar.range(of: .weekday, in: .weekOfYear, for: today)!
         let days = (weekdays.lowerBound ..< weekdays.upperBound).compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: today) }
         return days
-    }
-
-    func add(component: Calendar.Component, value: Int) -> Date {
-        return Calendar.current.date(byAdding: component, value: value, to: self)!
-    }
-
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-
-    var endOfDay: Date {
-        return self.set(hour: 23, minute: 59, second: 59)
     }
 
     func getDayOfWeek() -> DayOfWeek {
