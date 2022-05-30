@@ -205,6 +205,9 @@ open class JZBaseWeekView: UIView {
         self.scrollableRange.startDate = scrollableRange?.startDate
         self.scrollableRange.endDate = scrollableRange?.endDate
         self.currentTimelineType = currentTimelineType
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
