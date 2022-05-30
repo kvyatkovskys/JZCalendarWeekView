@@ -155,7 +155,11 @@ open class JZBaseWeekView: UIView {
         super.layoutSubviews()
 
         flowLayout.sectionWidth = getSectionWidth()
-        flowLayout.subsectionWidth = flowLayout.sectionWidth / CGFloat(max(numOfResources, 1))
+        if numOfResources > 7 {
+            flowLayout.subsectionWidth = 250
+        } else {
+            flowLayout.subsectionWidth = flowLayout.sectionWidth / CGFloat(max(numOfResources, 1))
+        }
     }
 
     /// Was going to use toDecimal1Value as well, but the CGFloat is always got the wrong precision
