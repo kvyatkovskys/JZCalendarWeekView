@@ -689,7 +689,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
                                     currentSectionZ: Int,
                                     resourceIdx: Int = 0,
                                     sectionWidth: CGFloat) {
-        let (maxOverlapIntervalCount, overlapGroups) = groupOverlapItems(items: sectionItemAttributes)
+        let (maxOverlapIntervalCount, overlapGroups) = groupOverlapItems(items: sectionItemAttributes.filter { $0.resourceIndex == resourceIdx })
         guard maxOverlapIntervalCount > 1 else { return }
 
         let sortedOverlapGroups = overlapGroups.sorted { $0.count > $1.count }
