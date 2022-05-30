@@ -197,7 +197,7 @@ public struct RestrictedArea: Hashable, Equatable {
     var isScheduleTemplate: Bool?
     var locationId: Int?
     
-    public init(timeRange: Range<TimeInterval> = nil,
+    public init(timeRange: Range<TimeInterval>,
                 title: String? = nil,
                 backgroundColor: UIColor? = nil,
                 isUnavailability: Bool? = nil,
