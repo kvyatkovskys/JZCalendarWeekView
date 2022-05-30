@@ -404,7 +404,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
 
         for item in 0..<collectionView.numberOfItems(inSection: section) {
             let itemIndexPath = IndexPath(item: item, section: section)
-            (attributes, itemAttributes) = layoutAttributesForCell(at: itemIndexPath, withItemCache: itemAttributes)
 
             let itemStartTime = startTimeForIndexPath(itemIndexPath)
             let itemEndTime = endTimeForIndexPath(itemIndexPath)
@@ -430,7 +429,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             let resourceOffset = (subsectionWidth * CGFloat(itemResourceIndex)).toDecimal1Value()
             let itemMinX = (sectionX + itemMargin.left + resourceOffset).toDecimal1Value()
             let itemMinY = (startHourY + startMinuteY + calendarStartY + itemMargin.top).toDecimal1Value()
-            let itemMaxX = (itemMinX + (sectionWidth - (itemMargin.left + itemMargin.right))).toDecimal1Value()
+            let itemMaxX = (itemMinX + (widthItem - (itemMargin.left + itemMargin.right))).toDecimal1Value()
             let itemMaxY = (endHourY + endMinuteY + calendarStartY - itemMargin.bottom).toDecimal1Value()
 
             if isPlaceholderEventForIndexPath(itemIndexPath) {
@@ -521,8 +520,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
                                          startY calendarStartY: CGFloat, gridlineWidth: CGFloat) -> Int {
         var _gridlineIndex = gridlineIndex
         var attributes = UICollectionViewLayoutAttributes()
-        let numberOfDivisions = 60 / hourGridDivision.rawValue
-        let divisionHeight = hourHeight / CGFloat(numberOfDivisions)
 
         for division in 1..<numberOfDivisions {
             let horizontalGridlineIndexPath = IndexPath(item: _gridlineIndex, section: 0)
