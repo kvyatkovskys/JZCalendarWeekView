@@ -6,7 +6,7 @@
 //  Copyright © 2022 Jeff Zhang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final public class ZoomConfiguration: NSObject, NSCoding {
 

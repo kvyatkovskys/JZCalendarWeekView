@@ -25,7 +25,7 @@ public protocol WeekViewFlowLayoutDelegate: AnyObject {
     /// Get color for outside screen decoration
     func collectionView(_ collectionView: UICollectionView, colorForOutsideScreenDecorationViewAt indexPath: IndexPath) -> UIColor?
     /// Get color for outside screen decoration
-    func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<JZWeekViewFlowLayout.RestrictedArea>?
+    func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<RestrictedArea>?
     /// Get number of zones in section (number of providers as common)
     func collectionView(_ collectionView: UICollectionView, numberOfRestrictedLinesIn section: Int) -> Int
 }

@@ -474,7 +474,7 @@ open class JZBaseWeekView: UIView {
         return nil
     }
     
-    open func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<JZWeekViewFlowLayout.RestrictedArea>? {
+    open func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<RestrictedArea>? {
         // Override if needed in subclass
         return nil
     }
