@@ -110,6 +110,7 @@ open class JZBaseWeekView: UIView {
     internal var scrollableEdges: (leftX: CGFloat?, rightX: CGFloat?)
     
     public var currentDate = Date()
+    public var minimalSubSectionWidth: CGFloat?
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -155,8 +156,8 @@ open class JZBaseWeekView: UIView {
         super.layoutSubviews()
 
         flowLayout.sectionWidth = getSectionWidth()
-        if numOfResources > 7 {
-            flowLayout.subsectionWidth = 250
+        if let minimalWidth = minimalSubSectionWidth, numOfResources > 7 {
+            flowLayout.subsectionWidth = minimalWidth
         } else {
             flowLayout.subsectionWidth = flowLayout.sectionWidth / CGFloat(max(numOfResources, 1))
         }
