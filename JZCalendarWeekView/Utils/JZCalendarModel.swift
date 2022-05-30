@@ -190,7 +190,7 @@ public enum ScrollPosition: Int {
 }
 
 public struct RestrictedArea: Hashable, Equatable {
-    var timeRange: Range<TimeInterval>
+    public var timeRange: Range<TimeInterval>
     var title: String?
     var backgroundColor: UIColor?
     var isUnavailability: Bool?

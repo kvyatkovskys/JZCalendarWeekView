@@ -972,7 +972,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     
     /// Vertically scroll the collectionView to specific time in a day, only **hour** will be calulated for the offset.
     /// If the hour you set is too large, it will only reach the bottom 24:00 as the maximum value.
-    func scrollCollectionViewTo(time: Date, position: ScrollPosition = .top, zoomLevel: ZoomConfiguration.ZoomLevel? = nil, animated: Bool = false) {
+    open func scrollCollectionViewTo(time: Date, position: ScrollPosition = .top, zoomLevel: ZoomConfiguration.ZoomLevel? = nil, animated: Bool = false) {
         let minLimit: CGFloat = 0
         let maxLimit: CGFloat = collectionView!.contentSize.height - collectionView!.bounds.height
         var hourY = CGFloat(Calendar.current.component(.hour, from: time)) * (zoomLevel?.value.height ?? hourHeight)

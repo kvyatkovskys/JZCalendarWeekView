@@ -192,7 +192,7 @@ open class JZBaseWeekView: UIView {
                             currentTimelineType: JZCurrentTimelineType = .section,
                             visibleTime: Date = Date(),
                             scrollableRange: (startDate: Date?, endDate: Date?)? = (nil, nil)) {
-
+        currentDate = setDate
         self.numOfDays = numOfDays
         if numOfDays == 7 {
             updateFirstDayOfWeek(setDate: setDate, firstDayOfWeek: firstDayOfWeek)
@@ -321,10 +321,17 @@ open class JZBaseWeekView: UIView {
     /// - Parameters:
     ///    - date: this date is the current date in one-day view rather than initDate
     open func updateWeekView(to date: Date) {
-        self.initDate = date.startOfDay.add(component: .day, value: -numOfDays)
+        currentDate = date
+        initDate = date.startOfDay.add(component: .day, value: -numOfDays)
+        
         DispatchQueue.main.async { [weak self] in
             self?.layoutSubviews()
             self?.forceReload()
+            
+            if scrollToTime {
+                self?.flowLayout.scrollCollectionViewTo(time: date,
+                                                        position: .centerVertically)
+            }
         }
     }
 
@@ -672,8 +679,9 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
 
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
-        self.initDate = self.initDate.add(component: .day, value: addValue)
-        self.forceReload()
+        currentDate = currentDate.add(component: .day, value: addValue)
+        initDate = initDate.add(component: .day, value: addValue)
+        forceReload()
     }
 
 }
