@@ -80,8 +80,34 @@ final public class ZoomConfiguration: NSObject, NSCoding {
 
 final public class TimelineConfiguration: NSObject, NSCoding {
 
-    public enum TimelineType: Int {
-        case short, full
+    public enum TimelineType: RawRepresentable {
+        public typealias RawValue = Int
+        
+        case short, full, custom(ClosedRange<Int>)
+        
+        public var rawValue: Int {
+            switch self {
+            case .short:
+                return 0
+            case .full:
+                return 1
+            case .custom:
+                return 2
+            }
+        }
+        
+        public init?(rawValue: Int) {
+            switch rawValue {
+            case 0:
+                self = .short
+            case 1:
+                self = .full
+            case 2:
+                self = .custom(0...24)
+            default:
+                return nil
+            }
+        }
 
         public var image: UIImage? {
             switch self {
@@ -89,6 +115,8 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return UIImage(named: "ic_timeline_less")
             case .short:
                 return UIImage(named: "ic_timeline_more")
+            case .custom:
+                return nil
             }
         }
 
@@ -98,6 +126,10 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return "24"
             case .short:
                 return "12"
+            case .custom(let range):
+                guard range.upperBound > range.lowerBound else { return "" }
+                
+                return "\(range.lowerBound)...\(range.upperBound)"
             }
         }
 
@@ -107,6 +139,8 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return 0...24
             case .short:
                 return 0...12
+            case .custom(let range):
+                return range
             }
         }
 
@@ -116,6 +150,8 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return 6
             case .full:
                 return 0
+            case .custom(let range):
+                return range.lowerBound
             }
         }
 
@@ -125,6 +161,10 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return "View 12 hours per day"
             case .short:
                 return "View 24 hours per day"
+            case .custom(let range):
+                guard range.upperBound > range.lowerBound else { return "" }
+                
+                return "View \(range.upperBound - range.lowerBound) hours per day"
             }
         }
     }
@@ -151,9 +191,11 @@ final public class TimelineConfiguration: NSObject, NSCoding {
 }
 
 extension TimelineConfiguration {
+    
     static func == (lhs: TimelineConfiguration, rhs: TimelineConfiguration) -> Bool {
-        return lhs.userId == rhs.userId
+        lhs.userId == rhs.userId
     }
+    
 }
 
 private enum AssociatedKeys {

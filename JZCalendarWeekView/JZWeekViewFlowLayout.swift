@@ -66,7 +66,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     open var itemMargin: UIEdgeInsets { return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1) }
     /// weekview contentSize height
     open var maxSectionHeight: CGFloat {
-        let height = hourHeight * 24 // statement too long for Swift 5 compiler
+        let height = hourHeight * CGFloat(timelineType.timeRange.upperBound) // statement too long for Swift 5 compiler
         return columnHeaderHeight + height + contentsMargin.top + contentsMargin.bottom + allDayHeaderHeight
     }
 
@@ -83,7 +83,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     var needsToPopulateAttributesForAllSections = true
 
     var currentZoom = ZoomConfiguration.ZoomLevel.default
-    var timelineType: TimelineConfiguration.TimelineType = .full
+    var timelineType = TimelineConfiguration.TimelineType.full
     var didRestrictScrollOffset: ((JZBaseWeekView.RestrictOffsetY?) -> Void)?
     
     var currentTimeComponents: DateComponents {
@@ -94,10 +94,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     private var hourHeightForZoomLevel: CGFloat {
-        if isPeekView {
-            return ZoomConfiguration.ZoomLevel.max.value.height
-        }
-        return currentZoom.value.height
+        currentZoom.value.height
     }
     
     public var isPeekView: Bool = false
@@ -260,8 +257,8 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         // TODO: Should improve this method, otherwise every column will display a timeline view
         sectionIndexes.enumerate(_:) { (section, _) in
             let sectionMinX = calendarContentMinX + sectionWidth * CGFloat(section)
-            let timeY = calendarContentMinY + (CGFloat(currentTimeComponents.hour!).toDecimal1Value() * hourHeight
-                + CGFloat(currentTimeComponents.minute!) * minuteHeight)
+            let value = CGFloat(timelineType.offset) * hourHeightForZoomLevel
+            let timeY = calendarContentMinY + (CGFloat(currentTimeComponents.hour!).toDecimal1Value() * hourHeight - value + CGFloat(currentTimeComponents.minute!) * minuteHeight)
             let currentTimeHorizontalGridlineMinY = timeY - (defaultGridThickness / 2.0).toDecimal1Value() - defaultCurrentTimeLineHeight/2
             (attributes, currentTimeLineAttributes) = layoutAttributesForSupplemantaryView(at: IndexPath(item: 0, section: section),
                                                                                            ofKind: JZSupplementaryViewKinds.currentTimeline,
@@ -533,7 +530,12 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             attributes.zIndex = zIndexForElementKind(JZDecorationViewKinds.horizontalGridline)
 
             _gridlineIndex += 1
-
+            
+            layoutRowDividerHorizontalAttributes(startX: calendarStartX - rowHeaderWidth,
+                                                 startY: horizontalGridlineMinY,
+                                                 division: division,
+                                                 indexPath: horizontalGridlineIndexPath)
+            
         }
         return _gridlineIndex
     }
@@ -934,8 +936,11 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         if cachedStartTimeDateComponents[indexPath] != nil {
             return cachedStartTimeDateComponents[indexPath]!
         } else {
-            if let date = delegate?.collectionView(collectionView!, layout: self, startTimeForItemAtIndexPath: indexPath) {
-                cachedStartTimeDateComponents[indexPath] = Calendar.current.dateComponents([.day, .hour, .minute], from: date)
+            if let date = delegate?.collectionView(collectionView!,
+                                                   layout: self, startTimeForItemAtIndexPath: indexPath) {
+                var startDate = Calendar.current.dateComponents([.day, .hour, .minute], from: date)
+                startDate.hour = (startDate.hour ?? 0) - timelineType.offset
+                cachedStartTimeDateComponents[indexPath] = startDate
                 return cachedStartTimeDateComponents[indexPath]!
             } else {
                 fatalError()
@@ -947,8 +952,11 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         if cachedEndTimeDateComponents[indexPath] != nil {
             return cachedEndTimeDateComponents[indexPath]!
         } else {
-            if let date = delegate?.collectionView(collectionView!, layout: self, endTimeForItemAtIndexPath: indexPath) {
-                cachedEndTimeDateComponents[indexPath] = Calendar.current.dateComponents([.day, .hour, .minute], from: date)
+            if let date = delegate?.collectionView(collectionView!,
+                                                   layout: self, endTimeForItemAtIndexPath: indexPath) {
+                var endTime = Calendar.current.dateComponents([.day, .hour, .minute], from: date)
+                endTime.hour = (endTime.hour ?? 0) - timelineType.offset
+                cachedEndTimeDateComponents[indexPath] = endTime
                 return cachedEndTimeDateComponents[indexPath]!
             } else {
                 fatalError()
@@ -975,7 +983,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         var hourY = CGFloat(Calendar.current.component(.hour, from: time)) * (zoomLevel?.value.height ?? hourHeight)
         
         if timelineType == .short {
-            hourY -= (zoomLevel?.value.height ?? hourHeight) * 6
+            hourY -= (zoomLevel?.value.height ?? hourHeight) * CGFloat(timelineType.offset)
         }
         
         let y: CGFloat = {
@@ -995,7 +1003,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     
     open func timeForRowHeader(at indexPath: IndexPath) -> Date {
         var components = daysForSection(indexPath.section)
-        components.hour = indexPath.item
+        components.hour = indexPath.item + timelineType.offset
         return Calendar.current.date(from: components)!
     }
     
@@ -1061,7 +1069,10 @@ extension JZWeekViewFlowLayout {
         register(JZRowDividerHorizontalHeader.self, forDecorationViewOfKind: JZDecorationViewKinds.rowHeaderDivider)
     }
 
-    private func layoutRowDividerHorizontalAttributes(startX: CGFloat, startY: CGFloat, division: Int, indexPath: IndexPath) {
+    private func layoutRowDividerHorizontalAttributes(startX: CGFloat,
+                                                      startY: CGFloat,
+                                                      division: Int,
+                                                      indexPath: IndexPath) {
         var attributes = UICollectionViewLayoutAttributes()
         (attributes, rowHeaderDividerHorizontalAttributes) = layoutAttributesForDecorationView(at: indexPath,
                                                                                                ofKind: JZDecorationViewKinds.rowHeaderDivider,
@@ -1166,18 +1177,26 @@ extension JZWeekViewFlowLayout {
                                                                                         attributesKind: JZTemplatesLayoutAttributes.self)
 
             attributes.zIndex = zIndexForElementKind(JZDecorationViewKinds.restrictedArea)
-
-            let minY: CGFloat
-            let maxY: CGFloat
-
-            switch timelineType {
-            case .short:
-                minY = yForSeconds(area.timeRange.lowerBound) + calendarGridMinY - CGFloat(timelineType.offset)*hourHeightForZoomLevel
-                maxY = yForSeconds(area.timeRange.upperBound) + calendarGridMinY - CGFloat(timelineType.offset)*hourHeightForZoomLevel
-            case .full:
-                minY = yForSeconds(area.timeRange.lowerBound) + calendarGridMinY
-                maxY = yForSeconds(area.timeRange.upperBound) + calendarGridMinY
+            
+            func calculateY() -> (minY: CGFloat, maxY: CGFloat) {
+                var minY = yForSeconds(area.timeRange.lowerBound) + calendarGridMinY
+                var maxY = yForSeconds(area.timeRange.upperBound) + calendarGridMinY
+                let value = CGFloat(timelineType.offset) * hourHeightForZoomLevel
+                
+                switch timelineType {
+                case .short, .custom:
+                    minY -= value
+                    maxY -= value
+                default:
+                    break
+                }
+                
+                return (minY, maxX)
             }
+
+            let result = calculateY()
+            let minY = result.minY
+            let maxY = result.maxY
 
             attributes.frame = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
 
