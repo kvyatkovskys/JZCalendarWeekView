@@ -54,7 +54,7 @@ class LongPressWeekView: JZLongPressWeekView {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedEvent = getCurrentEvent(with: indexPath) as? AllDayEvent {
-            ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title)
+            ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title + "\(selectedEvent.startDate) - \(selectedEvent.endDate)")
         }
     }
 }

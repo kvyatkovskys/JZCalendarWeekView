@@ -28,7 +28,7 @@ class DefaultWeekView: JZBaseWeekView {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedEvent = getCurrentEvent(with: indexPath) as? DefaultEvent {
-            ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title)
+            ToastUtil.toastMessageInTheMiddle(message: selectedEvent.title + "\(selectedEvent.startDate) - \(selectedEvent.endDate)")
         }
     }
 }

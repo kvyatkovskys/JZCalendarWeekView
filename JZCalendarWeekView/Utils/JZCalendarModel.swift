@@ -83,7 +83,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
     public enum TimelineType: RawRepresentable {
         public typealias RawValue = Int
         
-        case short, full, custom(ClosedRange<Int>)
+        case short, full, range(ClosedRange<Int>)
         
         public var rawValue: Int {
             switch self {
@@ -91,7 +91,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return 0
             case .full:
                 return 1
-            case .custom:
+            case .range:
                 return 2
             }
         }
@@ -103,7 +103,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
             case 1:
                 self = .full
             case 2:
-                self = .custom(0...24)
+                self = .range(0...24)
             default:
                 return nil
             }
@@ -115,7 +115,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return UIImage(named: "ic_timeline_less")
             case .short:
                 return UIImage(named: "ic_timeline_more")
-            case .custom:
+            case .range:
                 return nil
             }
         }
@@ -126,7 +126,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return "24"
             case .short:
                 return "12"
-            case .custom(let range):
+            case .range(let range):
                 guard range.upperBound > range.lowerBound else { return "" }
                 
                 return "\(range.lowerBound)...\(range.upperBound)"
@@ -138,20 +138,39 @@ final public class TimelineConfiguration: NSObject, NSCoding {
             case .full:
                 return 0...24
             case .short:
-                return 0...12
-            case .custom(let range):
+                return 6...18
+            case .range(let range):
                 return range
             }
         }
-
-        public var offset: Int {
+        
+        public var offset: ClosedRange<Int> {
+            0...duration
+        }
+        
+        public var duration: Int {
+            switch self {
+            case .short:
+                return 12
+            case .full:
+                return 24
+            case .range(let range):
+                guard range.upperBound > range.lowerBound else { return 24 }
+                
+                return range.upperBound - range.lowerBound
+            }
+        }
+        
+        public var endOffset: Int {
             switch self {
             case .short:
                 return 6
             case .full:
                 return 0
-            case .custom(let range):
-                return range.lowerBound
+            case .range(let range):
+                guard range.upperBound < 24 else { return 0 }
+                
+                return 24 - range.upperBound
             }
         }
 
@@ -161,7 +180,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
                 return "View 12 hours per day"
             case .short:
                 return "View 24 hours per day"
-            case .custom(let range):
+            case .range(let range):
                 guard range.upperBound > range.lowerBound else { return "" }
                 
                 return "View \(range.upperBound - range.lowerBound) hours per day"
