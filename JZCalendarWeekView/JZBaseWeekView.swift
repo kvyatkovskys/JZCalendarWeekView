@@ -36,9 +36,9 @@ open class JZBaseWeekView: UIView {
         return collectionView
     }()
 
-    public var timelineHourType: TimelineConfiguration.TimelineType = .full {
+    public var timelineRange: TimelineConfiguration.TimelineType = .full {
         didSet {
-            flowLayout.timelineType = timelineHourType
+            flowLayout.timelineType = timelineRange
         }
     }
     
@@ -131,7 +131,7 @@ open class JZBaseWeekView: UIView {
         flowLayout.didRestrictScrollOffset = { [weak self] (value) in
             self?.restrictOffset = value
         }
-        flowLayout.timelineType = timelineHourType
+        flowLayout.timelineType = timelineRange
 
         addSubview(collectionView)
         collectionView.setAnchorConstraintsFullSizeTo(view: self)
@@ -439,8 +439,8 @@ open class JZBaseWeekView: UIView {
         var adjustedY = contentOffsetY - flowLayout.contentsMargin.top
         adjustedY = max(0, adjustedY)
         var hour = Int(adjustedY / flowLayout.hourHeightForZoomLevel)
-        if timelineHourType != .full {
-            hour += timelineHourType.timeRange.lowerBound
+        if timelineRange != .full {
+            hour += timelineRange.timeRange.lowerBound
             adjustedY += flowLayout.timeRangeLowerOffset
         }
         let minute = Int((adjustedY / flowLayout.hourHeightForZoomLevel - CGFloat(hour)) * 60)
@@ -479,11 +479,11 @@ open class JZBaseWeekView: UIView {
         var adjustedY = yCollectionView - flowLayout.columnHeaderHeight - flowLayout.contentsMargin.top - flowLayout.allDayHeaderHeight
         let minY: CGFloat = 0
         // contentSize includes all reusableView, margin and scrollable area
-        let maxY = collectionView.contentSize.height - flowLayout.contentsMargin.top - flowLayout.contentsMargin.bottom - flowLayout.allDayHeaderHeight - flowLayout.columnHeaderHeight + (CGFloat(timelineHourType.timeRange.lowerBound) * flowLayout.hourHeightForZoomLevel)
+        let maxY = collectionView.contentSize.height - flowLayout.contentsMargin.top - flowLayout.contentsMargin.bottom - flowLayout.allDayHeaderHeight - flowLayout.columnHeaderHeight + flowLayout.timeRangeLowerOffset
         adjustedY = max(minY, min(adjustedY, maxY))
         var hour = Int(adjustedY / flowLayout.hourHeightForZoomLevel)
-        if timelineHourType != .full {
-            hour += timelineHourType.timeRange.lowerBound
+        if timelineRange != .full {
+            hour += timelineRange.timeRange.lowerBound
             adjustedY += flowLayout.timeRangeLowerOffset
         }
         let minute = Int((adjustedY / flowLayout.hourHeightForZoomLevel - CGFloat(hour)) * 60)
