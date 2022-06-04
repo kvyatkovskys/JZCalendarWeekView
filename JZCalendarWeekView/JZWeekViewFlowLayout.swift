@@ -286,7 +286,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         // Row header
         let rowHeaderMinX = fmax(collectionView.contentOffset.x, 0)
         
-        for rowHeaderIndex in timelineType.offset {
+        for rowHeaderIndex in timelineType.startRangeOffset {
             (attributes, rowHeaderAttributes) = layoutAttributesForSupplemantaryView(at: IndexPath(item: rowHeaderIndex, section: 0), ofKind: JZSupplementaryViewKinds.rowHeader, withItemCache: rowHeaderAttributes)
             let rowHeaderMinY = calendarContentMinY + hourHeightForZoomLevel * CGFloat(rowHeaderIndex) - (hourHeightForZoomLevel / 2.0).toDecimal1Value()
             attributes.frame = CGRect(x: rowHeaderMinX, y: rowHeaderMinY, width: rowHeaderWidth, height: hourHeightForZoomLevel)
@@ -491,7 +491,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         let calendarGridWidth = collectionViewContentSize.width - rowHeaderWidth - contentsMargin.left - contentsMargin.right
         var attributes = UICollectionViewLayoutAttributes()
         
-        for hour in timelineType.offset {
+        for hour in timelineType.startRangeOffset {
             (attributes, horizontalGridlineAttributes) = layoutAttributesForDecorationView(at: IndexPath(item: horizontalGridlineIndex, section: 0), ofKind: JZDecorationViewKinds.horizontalGridline, withItemCache: horizontalGridlineAttributes)
             let horizontalGridlineXOffset = calendarStartX
             let horizontalGridlineMinX = fmax(horizontalGridlineXOffset, collectionView!.contentOffset.x + horizontalGridlineXOffset)

@@ -186,6 +186,28 @@ open class JZBaseWeekView: UIView {
         flowLayout.rowHeaderWidth = rowHeaderWidth
         return sectionWidth
     }
+    
+    open func reloadWithOptions(_ options: JZCalendarReloadOption...) {
+        options.forEach {
+            switch $0 {
+            case .date(let date):
+                // Update Date
+                updateWeekView(to: date)
+            case .numOfDays(let days):
+                // Update numOfDays
+                numOfDays = days
+                refreshWeekView()
+            case .firstDayOfWeek(let date, let dayOfWeek):
+                // Update FirstDayOfWeek
+                updateFirstDayOfWeek(setDate: date, firstDayOfWeek: dayOfWeek)
+            case .layout(let layout):
+                // Update Layout
+                updateFlowLayout(layout ?? flowLayout)
+            case .events(let events):
+                forceReload(reloadEvents: events)
+            }
+        }
+    }
 
     /**
      Basic Setup method for JZCalendarWeekView,it **must** be called.
@@ -409,7 +431,8 @@ open class JZBaseWeekView: UIView {
         let setDayOfWeek = setDate.getDayOfWeek()
         var diff = setDayOfWeek.rawValue - firstDayOfWeek.rawValue
         if diff < 0 { diff = 7 - abs(diff) }
-        self.initDate = setDate.startOfDay.add(component: .day, value: -numOfDays - diff)
+        currentDate = setDate
+        initDate = setDate.startOfDay.add(component: .day, value: -numOfDays - diff)
         self.firstDayOfWeek = firstDayOfWeek
     }
 

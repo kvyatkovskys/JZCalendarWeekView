@@ -8,6 +8,14 @@
 
 import UIKit
 
+public enum JZCalendarReloadOption {
+    case date(Date),
+         numOfDays(Int),
+         firstDayOfWeek(Date, DayOfWeek),
+         layout(JZWeekViewFlowLayout?),
+         events([Date: [JZBaseEvent]]?)
+}
+
 final public class ZoomConfiguration: NSObject, NSCoding {
 
     public enum ZoomLevel: Int {
@@ -83,7 +91,12 @@ final public class TimelineConfiguration: NSObject, NSCoding {
     public enum TimelineType: RawRepresentable {
         public typealias RawValue = Int
         
-        case short, full, range(ClosedRange<Int>)
+        /// short range is 6:00 AM - 6:00PM
+        case short
+        /// full range is 12:00AM - 12:00PM
+        case full
+        /// custom range is 9:00AM - 9:00PM (for ex.)
+        case range(ClosedRange<Int>)
         
         public var rawValue: Int {
             switch self {
@@ -144,7 +157,7 @@ final public class TimelineConfiguration: NSObject, NSCoding {
             }
         }
         
-        public var offset: ClosedRange<Int> {
+        public var startRangeOffset: ClosedRange<Int> {
             0...duration
         }
         

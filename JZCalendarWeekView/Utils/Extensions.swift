@@ -228,7 +228,7 @@ extension Date {
 
     func getTimeIgnoreSecondsFormat() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
+        formatter.dateFormat = "hh:mm a"
         return formatter.string(from: self)
     }
 
@@ -252,7 +252,13 @@ extension Date {
 
     var weekday: Int { return dateComponents.weekday! }
 
-    func set(year: Int?=nil, month: Int?=nil, day: Int?=nil, hour: Int?=nil, minute: Int?=nil, second: Int?=nil, tz: String?=nil) -> Date {
+    func set(year: Int? = nil,
+             month: Int? = nil,
+             day: Int? = nil,
+             hour: Int? = nil,
+             minute: Int? = nil,
+             second: Int? = nil,
+             tz: String? = nil) -> Date {
         let timeZone = Calendar.current.timeZone
         let year = year ?? self.year
         let month = month ?? self.month
