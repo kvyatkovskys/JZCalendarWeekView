@@ -162,6 +162,9 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
                       columnHeaderHeight: columnHeaderHeight,
                       hourGridDivision: hourGridDivision)
         initializeMinuteTick()
+        setupOutsideScreenDecorations()
+        setupRestrictedAreasDecorations()
+        setupRowHeaderDivider()
     }
     
     required public init?(coder aDecoder: NSCoder) {
