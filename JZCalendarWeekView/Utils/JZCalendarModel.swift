@@ -89,7 +89,7 @@ final public class ZoomConfiguration: NSObject, NSCoding {
 final public class TimelineConfiguration: NSObject, NSCoding {
 
     public enum TimelineType: RawRepresentable {
-        public typealias RawValue = Int
+        public typealias RawValue = ClosedRange<Int>
         
         /// short range is 6:00 AM - 6:00PM
         case short
@@ -98,27 +98,25 @@ final public class TimelineConfiguration: NSObject, NSCoding {
         /// custom range is 9:00AM - 9:00PM (for ex.)
         case range(ClosedRange<Int>)
         
-        public var rawValue: Int {
+        public var rawValue: ClosedRange<Int> {
             switch self {
             case .short:
-                return 0
+                return 6...18
             case .full:
-                return 1
-            case .range:
-                return 2
+                return 0...24
+            case .range(let range):
+                return range
             }
         }
         
-        public init?(rawValue: Int) {
+        public init?(rawValue: ClosedRange<Int>) {
             switch rawValue {
-            case 0:
+            case 6...18:
                 self = .short
-            case 1:
+            case 0...24:
                 self = .full
-            case 2:
-                self = .range(0...24)
             default:
-                return nil
+                self = .range(rawValue)
             }
         }
 
@@ -212,13 +210,15 @@ final public class TimelineConfiguration: NSObject, NSCoding {
 
     required public init(coder aDecoder: NSCoder) {
         userId = aDecoder.decodeInteger(forKey: "userId")
-        let type = aDecoder.decodeInteger(forKey: "timelineType")
-        timelineType = TimelineType(rawValue: type) ?? .full
+        let lowerBound = aDecoder.decodeInteger(forKey: "rangeLowerBound")
+        let uppderBound = aDecoder.decodeInteger(forKey: "rangeUpperBound")
+        timelineType = TimelineType(rawValue: lowerBound...uppderBound) ?? .full
     }
 
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(userId, forKey: "userId")
-        aCoder.encode(timelineType.rawValue, forKey: "timelineType")
+        aCoder.encode(timelineType.rawValue.lowerBound, forKey: "rangeLowerBound")
+        aCoder.encode(timelineType.rawValue.upperBound, forKey: "rangeUpperBound")
     }
 }
 
