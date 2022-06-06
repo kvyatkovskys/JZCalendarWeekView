@@ -116,7 +116,20 @@ final public class TimelineConfiguration: NSObject, NSCoding {
             case 0...24:
                 self = .full
             default:
-                self = .range(rawValue)
+                var lower = rawValue.lowerBound
+                var upper = rawValue.upperBound
+                if lower >= upper {
+                    if 0...23 ~= lower {
+                        upper = lower + 1
+                    } else {
+                        lower = 0
+                        upper = 24
+                    }
+                } else if !rawValue.overlaps(0...24) {
+                    lower = 0
+                    upper = 24
+                }
+                self = .range(lower...upper)
             }
         }
 
