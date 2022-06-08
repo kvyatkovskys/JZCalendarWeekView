@@ -57,8 +57,8 @@ public enum JZHourGridDivision: Int {
     case minutes_30 = 30
 }
 
-public enum DayOfWeek: Int {
-    case Sunday = 1, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+public enum DayOfWeek: Int, CaseIterable {
+    case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
 }
 
 public enum JZScrollType {

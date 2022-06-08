@@ -212,7 +212,7 @@ extension Date {
 
     static func getCurrentWeekDays(firstDayOfWeek: DayOfWeek?=nil) -> [Date] {
         var calendar = Calendar.current
-        calendar.firstWeekday = (firstDayOfWeek ?? .Sunday).rawValue
+        calendar.firstWeekday = (firstDayOfWeek ?? .sunday).rawValue
         let today = calendar.startOfDay(for: Date())
         let dayOfWeek = calendar.component(.weekday, from: today)
         let weekdays = calendar.range(of: .weekday, in: .weekOfYear, for: today)!

@@ -24,9 +24,9 @@ final public class ZoomConfiguration: NSObject, NSCoding {
         public var image: UIImage? {
             switch self {
             case .min, .default:
-                return UIImage(named: "ic_zoom_max")?.withRenderingMode(.alwaysTemplate)
+                return UIImage(systemName: "plus.magnifyingglass")?.withRenderingMode(.alwaysTemplate)
             case .max:
-                return UIImage(named: "ic_zoom_min")?.withRenderingMode(.alwaysTemplate)
+                return UIImage(systemName: "minus.magnifyingglass")?.withRenderingMode(.alwaysTemplate)
             }
         }
 

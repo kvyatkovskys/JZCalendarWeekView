@@ -86,7 +86,8 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     
     var currentTimeComponents: DateComponents {
         if cachedCurrentTimeComponents[0] == nil {
-            cachedCurrentTimeComponents[0] = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+            cachedCurrentTimeComponents[0] = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                                             from: Date())
         }
         return cachedCurrentTimeComponents[0]!
     }
@@ -390,7 +391,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView,
               let resCount = delegate?.collectionView(collectionView, resourceCountWithLayout: self) else { return }
         
-        var attributes =  UICollectionViewLayoutAttributesResource()
+        var attributes = UICollectionViewLayoutAttributesResource()
         var sectionItemAttributes = [UICollectionViewLayoutAttributesResource]()
         
         for item in 0..<collectionView.numberOfItems(inSection: section) {

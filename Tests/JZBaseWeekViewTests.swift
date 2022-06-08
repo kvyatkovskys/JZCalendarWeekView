@@ -51,7 +51,7 @@ class JZBaseWeekViewTests: XCTestCase {
     func testGetDateForSection_7Days() {
         // testeDate is 2019-05-23 Thursday, so first date of current page will be 2019-05-19 Sunday
         let testDate = Helpers.testDate
-        baseWeekView.setupCalendar(numOfDays: 7, setDate: testDate, allEvents: [:], firstDayOfWeek: .Sunday)
+        baseWeekView.setupCalendar(numOfDays: 7, setDate: testDate, allEvents: [:], firstDayOfWeek: .sunday)
 
         let currentDate = baseWeekView.getDateForSection(7 + 4)
         XCTAssertEqual(currentDate, testDate)

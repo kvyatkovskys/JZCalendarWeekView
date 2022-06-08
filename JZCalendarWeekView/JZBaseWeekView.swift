@@ -79,6 +79,7 @@ open class JZBaseWeekView: UIView {
     }
     public var numOfDays: Int = 0
     public var numOfResources: Int = 1
+    public var minimalNumberOfResources = 7
     public var scrollType: JZScrollType = .pageScroll
     public var currentTimelineType: JZCurrentTimelineType = .page {
         didSet {
@@ -86,7 +87,7 @@ open class JZBaseWeekView: UIView {
             self.collectionView.register(viewClass, forSupplementaryViewOfKind: JZSupplementaryViewKinds.currentTimeline, withReuseIdentifier: JZSupplementaryViewKinds.currentTimeline)
         }
     }
-    public var firstDayOfWeek: DayOfWeek = .Sunday
+    public var firstDayOfWeek: DayOfWeek = .sunday
     public var allEventsBySection: [Date: [JZBaseEvent]] = [:] {
         didSet {
             self.isAllDaySupported = allEventsBySection is [Date: [JZAllDayEvent]]
@@ -97,7 +98,6 @@ open class JZBaseWeekView: UIView {
     }
     public var notAllDayEventsBySection = [Date: [JZAllDayEvent]]()
     public var allDayEventsBySection = [Date: [JZAllDayEvent]]()
-
     public weak var baseDelegate: JZBaseViewDelegate?
     open var contentViewWidth: CGFloat {
         frame.width - flowLayout.rowHeaderWidth - flowLayout.contentsMargin.left - flowLayout.contentsMargin.right
@@ -107,12 +107,14 @@ open class JZBaseWeekView: UIView {
     }
     private var isFirstAppear: Bool = true
     public var isAllDaySupported: Bool = false
+    private var isEnabledHorizontalScrolling: Bool {
+        numOfDays == 7
+    }
     internal var scrollDirection: ScrollDirection?
 
     // Scrollable Range
     internal var scrollableEdges: (leftX: CGFloat?, rightX: CGFloat?)
     
-    public var currentDate = Date()
     public var minimalSubSectionWidth: CGFloat?
 
     override public init(frame: CGRect) {
@@ -132,7 +134,7 @@ open class JZBaseWeekView: UIView {
             self?.restrictOffset = value
         }
         flowLayout.timelineType = timelineRange
-
+        
         addSubview(collectionView)
         collectionView.setAnchorConstraintsFullSizeTo(view: self)
 
@@ -160,7 +162,7 @@ open class JZBaseWeekView: UIView {
 
         flowLayout.sectionHeight = contentViewHeight
         flowLayout.sectionWidth = getSectionWidth()
-        if let minimalWidth = minimalSubSectionWidth, numOfResources > 7 {
+        if let minimalWidth = minimalSubSectionWidth, numOfResources > minimalNumberOfResources {
             flowLayout.subsectionWidth = minimalWidth
         } else {
             flowLayout.subsectionWidth = flowLayout.sectionWidth / CGFloat(max(numOfResources, 1))
@@ -226,13 +228,13 @@ open class JZBaseWeekView: UIView {
                             setDate: Date,
                             allEvents: [Date: [JZBaseEvent]],
                             scrollType: JZScrollType = .pageScroll,
-                            firstDayOfWeek: DayOfWeek? = .Sunday,
+                            firstDayOfWeek: DayOfWeek? = .sunday,
                             currentTimelineType: JZCurrentTimelineType = .section,
                             visibleTime: Date = Date(),
+                            forceUpdateFirstDayOfWeek: Bool = true,
                             scrollableRange: (startDate: Date?, endDate: Date?)? = (nil, nil)) {
-        currentDate = setDate
         self.numOfDays = numOfDays
-        if numOfDays == 7 {
+        if numOfDays == 7 || forceUpdateFirstDayOfWeek {
             updateFirstDayOfWeek(setDate: setDate, firstDayOfWeek: firstDayOfWeek)
         } else {
             self.initDate = setDate.startOfDay.add(component: .day, value: -numOfDays)
@@ -304,7 +306,7 @@ open class JZBaseWeekView: UIView {
     /// If the actual height(contentSize height) is higher than this one, then the AllDayHeader will become scrollable.
     /// - Parameter maxEventsCount: Among all days appeared in current page, the maximum all-day events count in one day
     open func getAllDayHeaderHeight(maxEventsCount: Int) -> CGFloat {
-        return flowLayout.defaultAllDayOneLineHeight * CGFloat(min(maxEventsCount, 2))
+        flowLayout.defaultAllDayOneLineHeight * CGFloat(min(maxEventsCount, 2))
     }
 
     /// Update collectionViewLayout with custom flowLayout. For some other values like gridThickness and contentsMargin, please inherit from JZWeekViewFlowLayout to change the default value
@@ -361,7 +363,6 @@ open class JZBaseWeekView: UIView {
     /// - Parameters:
     ///    - date: this date is the current date in one-day view rather than initDate
     open func updateWeekView(to date: Date, scrollToTime: Bool = false) {
-        currentDate = date
         initDate = date.startOfDay.add(component: .day, value: -numOfDays)
         
         DispatchQueue.main.async { [weak self] in
@@ -427,11 +428,10 @@ open class JZBaseWeekView: UIView {
     }
 
     open func updateFirstDayOfWeek(setDate: Date, firstDayOfWeek: DayOfWeek?) {
-        guard let firstDayOfWeek = firstDayOfWeek, numOfDays == 7 else { return }
+        guard let firstDayOfWeek = firstDayOfWeek else { return }
         let setDayOfWeek = setDate.getDayOfWeek()
         var diff = setDayOfWeek.rawValue - firstDayOfWeek.rawValue
-        if diff < 0 { diff = 7 - abs(diff) }
-        currentDate = setDate
+        if diff < 0 { diff = numOfDays - abs(diff) }
         initDate = setDate.startOfDay.add(component: .day, value: -numOfDays - diff)
         self.firstDayOfWeek = firstDayOfWeek
     }
@@ -467,7 +467,6 @@ open class JZBaseWeekView: UIView {
             adjustedY += flowLayout.timeRangeLowerOffset
         }
         let minute = Int((adjustedY / flowLayout.hourHeightForZoomLevel - CGFloat(hour)) * 60)
-        print(hour, minute)
         return (hour, minute)
     }
 
@@ -621,6 +620,8 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
     }
 
     open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard isEnabledHorizontalScrolling else { return }
+        
         // Only check when scroll direction is nil to ensure the direction for this scroll before it ends
         // Because if swipe again before scroll ends, this method will be called again but the direction should be the same
         if self.scrollDirection != nil { return }
@@ -631,18 +632,24 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
     }
 
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard isEnabledHorizontalScrolling else { return }
+        
         // vertical scroll should not call paginationEffect
         guard let scrollDirection = self.scrollDirection, scrollDirection.direction == .horizontal else { return }
         paginationEffect(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
     }
 
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard isEnabledHorizontalScrolling else { return }
+        
         // handle the situation scrollViewDidEndDecelerating not being called
         if !decelerate { self.endOfScroll() }
     }
 
     // This function will be called when veritical scrolling ends
     open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard isEnabledHorizontalScrolling else { return }
+        
         self.endOfScroll()
     }
 
@@ -654,6 +661,11 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
     }
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isEnabledHorizontalScrolling else {
+            collectionView.contentOffset.x = contentViewWidth
+            return
+        }
+        
         guard let scrollDirection = scrollDirection else { return }
         if let lockedAt = scrollDirection.lockedAt {
             if scrollDirection.direction == .horizontal {
@@ -726,7 +738,6 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
 
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
-        currentDate = currentDate.add(component: .day, value: addValue)
         initDate = initDate.add(component: .day, value: addValue)
         forceReload()
     }
