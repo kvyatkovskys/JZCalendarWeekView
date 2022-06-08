@@ -116,6 +116,7 @@ open class JZBaseWeekView: UIView {
     internal var scrollableEdges: (leftX: CGFloat?, rightX: CGFloat?)
     
     public var minimalSubSectionWidth: CGFloat?
+    public var currentDate = Date()
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -233,6 +234,7 @@ open class JZBaseWeekView: UIView {
                             visibleTime: Date = Date(),
                             forceUpdateFirstDayOfWeek: Bool = true,
                             scrollableRange: (startDate: Date?, endDate: Date?)? = (nil, nil)) {
+        currentDate = setDate
         self.numOfDays = numOfDays
         if numOfDays == 7 || forceUpdateFirstDayOfWeek {
             updateFirstDayOfWeek(setDate: setDate, firstDayOfWeek: firstDayOfWeek)
@@ -363,6 +365,7 @@ open class JZBaseWeekView: UIView {
     /// - Parameters:
     ///    - date: this date is the current date in one-day view rather than initDate
     open func updateWeekView(to date: Date, scrollToTime: Bool = false) {
+        currentDate = date
         initDate = date.startOfDay.add(component: .day, value: -numOfDays)
         
         DispatchQueue.main.async { [weak self] in
@@ -738,6 +741,7 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
 
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
+        currentDate = currentDate.add(component: .day, value: addValue)
         initDate = initDate.add(component: .day, value: addValue)
         forceReload()
     }
