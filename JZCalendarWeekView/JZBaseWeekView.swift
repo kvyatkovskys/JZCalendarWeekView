@@ -189,7 +189,7 @@ open class JZBaseWeekView: UIView {
         return sectionWidth
     }
     
-    open func reloadWithOptions(_ options: JZCalendarReloadOption...) {
+    open func reloadWithOptions(_ options: [JZCalendarReloadOption]) {
         options.forEach {
             switch $0 {
             case .date(let date):
