@@ -13,7 +13,13 @@ public enum JZCalendarReloadOption {
          numOfDays(Int),
          firstDayOfWeek(Date, DayOfWeek),
          layout(JZWeekViewFlowLayout?),
-         events([Date: [JZBaseEvent]]?)
+         events([Date: [JZBaseEvent]]?),
+         numberOfResources(Int),
+         mode(JZCalendarMode)
+}
+
+public enum JZCalendarMode: Int {
+    case day, week
 }
 
 final public class ZoomConfiguration: NSObject, NSCoding {

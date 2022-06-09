@@ -108,7 +108,7 @@ open class JZBaseWeekView: UIView {
     private var isFirstAppear: Bool = true
     public var isAllDaySupported: Bool = false
     private var isEnabledHorizontalScrolling: Bool {
-        guard !isDayMode else { return true }
+        guard viewMode == .week else { return true }
         
         return numOfDays == 7
     }
@@ -119,7 +119,7 @@ open class JZBaseWeekView: UIView {
     
     public var minimalSubSectionWidth: CGFloat?
     public var currentDate = Date()
-    public var isDayMode = false
+    private var viewMode: JZCalendarMode = .day
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -211,6 +211,10 @@ open class JZBaseWeekView: UIView {
                 updateFlowLayout(layout ?? flowLayout)
             case .events(let events):
                 forceReload(reloadEvents: events)
+            case .numberOfResources(let number):
+                numOfResources = number
+            case .mode(let mode):
+                viewMode = mode
             }
         }
     }
@@ -434,7 +438,7 @@ open class JZBaseWeekView: UIView {
     }
 
     open func updateFirstDayOfWeek(setDate: Date, firstDayOfWeek: DayOfWeek?) {
-        guard let firstDayOfWeek = firstDayOfWeek, !isDayMode else { return }
+        guard let firstDayOfWeek = firstDayOfWeek, viewMode == .week else { return }
         let setDayOfWeek = setDate.getDayOfWeek()
         var diff = setDayOfWeek.rawValue - firstDayOfWeek.rawValue
         if diff < 0 { diff = numOfDays - abs(diff) }
