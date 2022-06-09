@@ -13,11 +13,10 @@ open class JZColumnHeaderBackground: UICollectionReusableView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .systemGray6
         clipsToBounds = true
         isOpaque = true
         layer.isDoubleSided = false
-        setupBottomDivider()
     }
 
     open func setupBottomDivider() {

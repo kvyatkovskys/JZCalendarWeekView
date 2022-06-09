@@ -15,8 +15,7 @@ open class JZCornerHeader: UICollectionReusableView {
         super.init(frame: .zero)
         isOpaque = true
         layer.isDoubleSided = false
-        backgroundColor = .white
-        setupBottomDivider()
+        backgroundColor = .systemGray6
     }
 
     open func setupBottomDivider() {
