@@ -108,7 +108,9 @@ open class JZBaseWeekView: UIView {
     private var isFirstAppear: Bool = true
     public var isAllDaySupported: Bool = false
     private var isEnabledHorizontalScrolling: Bool {
-        numOfDays == 7
+        guard !isDayMode else { return true }
+        
+        return numOfDays == 7
     }
     internal var scrollDirection: ScrollDirection?
 
@@ -117,6 +119,7 @@ open class JZBaseWeekView: UIView {
     
     public var minimalSubSectionWidth: CGFloat?
     public var currentDate = Date()
+    public var isDayMode = false
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -232,14 +235,14 @@ open class JZBaseWeekView: UIView {
                             firstDayOfWeek: DayOfWeek? = .sunday,
                             currentTimelineType: JZCurrentTimelineType = .section,
                             visibleTime: Date = Date(),
-                            forceUpdateFirstDayOfWeek: Bool = true,
+                            forceUpdateFirstDayOfWeek: Bool = false,
                             scrollableRange: (startDate: Date?, endDate: Date?)? = (nil, nil)) {
         currentDate = setDate
         self.numOfDays = numOfDays
         if numOfDays == 7 || forceUpdateFirstDayOfWeek {
             updateFirstDayOfWeek(setDate: setDate, firstDayOfWeek: firstDayOfWeek)
         } else {
-            self.initDate = setDate.startOfDay.add(component: .day, value: -numOfDays)
+            initDate = setDate.startOfDay.add(component: .day, value: -numOfDays)
         }
         self.allEventsBySection = allEvents
         self.scrollType = scrollType
@@ -431,7 +434,7 @@ open class JZBaseWeekView: UIView {
     }
 
     open func updateFirstDayOfWeek(setDate: Date, firstDayOfWeek: DayOfWeek?) {
-        guard let firstDayOfWeek = firstDayOfWeek else { return }
+        guard let firstDayOfWeek = firstDayOfWeek, !isDayMode else { return }
         let setDayOfWeek = setDate.getDayOfWeek()
         var diff = setDayOfWeek.rawValue - firstDayOfWeek.rawValue
         if diff < 0 { diff = numOfDays - abs(diff) }
