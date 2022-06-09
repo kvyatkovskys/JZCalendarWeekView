@@ -19,7 +19,7 @@ public enum JZCalendarReloadOption {
 }
 
 public enum JZCalendarMode: Int {
-    case day, week
+    case day, week, month
 }
 
 final public class ZoomConfiguration: NSObject, NSCoding {
