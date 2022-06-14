@@ -818,8 +818,7 @@ extension JZBaseWeekView {
                 if startDate >= currentPageFirstDate {
                     scrollableEdges.leftX = contentViewWidth
                 } else {
-                    let firstDateInView = initDate!
-                    if scrollType == .pageScroll || startDate <= firstDateInView {
+                    if scrollType == .pageScroll || startDate <= initDate {
                         scrollableEdges.leftX = nil
                     } else {
                         let days = Date.daysBetween(start: initDate, end: startDate, ignoreHours: true)
