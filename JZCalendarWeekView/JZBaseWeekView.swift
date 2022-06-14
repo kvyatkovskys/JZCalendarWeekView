@@ -63,7 +63,7 @@ open class JZBaseWeekView: UIView {
      - The core structure of JZCalendarWeekView is 3 pages, previous-current-next
      - If you want to update this value instead of using [updateWeekView(to date: Date)](), please **make sure the date is startOfDay**.
     */
-    public var initDate: Date! {
+    public var initDate: Date = Date() {
         didSet {
             baseDelegate?.initDateDidChange(self, initDate: initDate)
         }
