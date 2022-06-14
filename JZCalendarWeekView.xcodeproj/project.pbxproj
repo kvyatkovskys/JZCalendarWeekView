@@ -38,7 +38,6 @@
 		8EF7EBD120A55D1000D5CEEA /* JZAllDayHeaderBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF7EBD020A55D1000D5CEEA /* JZAllDayHeaderBackground.swift */; };
 		F9561531283E1D860005DD6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F9561530283E1D860005DD6F /* SnapKit */; };
 		F9561535283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561534283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift */; };
-		F9561537283E21330005DD6F /* JZPlaceholderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */; };
 		F9561539283E217F0005DD6F /* JZRestrictedAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561538283E217F0005DD6F /* JZRestrictedAreaView.swift */; };
 		F956153B283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956153A283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift */; };
 		F956153D283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956153C283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift */; };
@@ -92,7 +91,6 @@
 		8EF7EBCE20A55CF900D5CEEA /* JZAllDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZAllDayHeader.swift; sourceTree = "<group>"; };
 		8EF7EBD020A55D1000D5CEEA /* JZAllDayHeaderBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZAllDayHeaderBackground.swift; sourceTree = "<group>"; };
 		F9561534283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZOutsideCellDecorationView.swift; sourceTree = "<group>"; };
-		F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZPlaceholderEvent.swift; sourceTree = "<group>"; };
 		F9561538283E217F0005DD6F /* JZRestrictedAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZRestrictedAreaView.swift; sourceTree = "<group>"; };
 		F956153A283E22570005DD6F /* JZRowDeviderHorizontalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZRowDeviderHorizontalHeader.swift; sourceTree = "<group>"; };
 		F956153C283E3DCE0005DD6F /* JZDividerLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZDividerLayoutAttributes.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				8E023C83206C732300C523BE /* JZBaseEvent.swift */,
 				8E40B2DF20B65C4600FFEB68 /* JZAllDayEvent.swift */,
 				8E1BA969206B5350007BE13C /* JZWeekViewHelper.swift */,
-				F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */,
 				8E1BA95C206B4AD9007BE13C /* ReusableViews */,
 				8E1BA955206B4687007BE13C /* Utils */,
 				8E1BA94D206B4329007BE13C /* JZCalendarWeekView.h */,
@@ -378,7 +375,6 @@
 				8E1BA964206B4E82007BE13C /* JZCornerHeader.swift in Sources */,
 				F9561541283E3E230005DD6F /* JZStyleLayoutAttributes.swift in Sources */,
 				F9561543283E3E540005DD6F /* JZTemplatesLayoutAttributes.swift in Sources */,
-				F9561537283E21330005DD6F /* JZPlaceholderEvent.swift in Sources */,
 				F9BC40582844E61C0060A33F /* JZCalendarModel.swift in Sources */,
 				8E1BA96E206B5B55007BE13C /* JZRowHeaderBackground.swift in Sources */,
 				8EF7EBCD20A55C8E00D5CEEA /* JZAllDayCorner.swift in Sources */,

@@ -133,7 +133,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     private var outscreenCellsAttributes = AttDic()
     private var restrictedAreasAttributes = AttDic()
     private var rowHeaderDividerHorizontalAttributes = AttDic()
-    private var placeholderAttributes = AttDic()
     
     var allDayHeaderAttributes = AttDic()
     var allDayHeaderBackgroundAttributes = AttDic()
@@ -257,7 +256,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             allAttributes.append(contentsOf: outscreenCellsAttributes.values)
             allAttributes.append(contentsOf: restrictedAreasAttributes.values)
             allAttributes.append(contentsOf: rowHeaderDividerHorizontalAttributes.values)
-            allAttributes.append(contentsOf: placeholderAttributes.values)
         }
     }
     
@@ -432,11 +430,12 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             let itemMaxX = (itemMinX + (widthItem - (itemMargin.left + itemMargin.right))).toDecimal1Value()
             let itemMaxY = (endHourY + endMinuteY + calendarStartY - itemMargin.bottom).toDecimal1Value()
             
-            if isPlaceholderEventForIndexPath(itemIndexPath) {
-                layoutPlaceholderAttributes(frame: CGRect(x: itemMinX, y: itemMinY,
-                                                          width: widthItem, height: divisionHeight),
-                                            indexPath: itemIndexPath)
-            } else if (itemMaxY - itemMinY) > 0 && itemMinY > 0 {
+//            if isPlaceholderEventForIndexPath(itemIndexPath) {
+//                layoutPlaceholderAttributes(frame: CGRect(x: itemMinX, y: itemMinY,
+//                                                          width: widthItem, height: divisionHeight),
+//                                            indexPath: itemIndexPath)
+//            } else
+            if (itemMaxY - itemMinY) > 0 && itemMinY > 0 {
                 (attributes, itemAttributes) = layoutAttributesForCell(at: itemIndexPath, withItemCache: itemAttributes)
                 attributes.frame = CGRect(x: itemMinX, y: itemMinY,
                                           width: itemMaxX - itemMinX, height: itemMaxY - itemMinY)
@@ -572,8 +571,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             return allDayHeaderAttributes[indexPath]
         case JZSupplementaryViewKinds.currentTimeline:
             return currentTimeLineAttributes[indexPath]
-        case JZSupplementaryViewKinds.placeholderCell:
-            return placeholderAttributes[indexPath]
         default:
             return nil
         }
@@ -877,7 +874,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         outscreenCellsAttributes.removeAll()
         restrictedAreasAttributes.removeAll()
         rowHeaderDividerHorizontalAttributes.removeAll()
-        placeholderAttributes.removeAll()
     }
     
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -1046,19 +1042,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             return minCellZ
         }
     }
-}
-
-// MARK: - Placeholder event
-extension JZWeekViewFlowLayout {
-    
-    private func layoutPlaceholderAttributes(frame: CGRect, indexPath: IndexPath) {
-        var attributes = UICollectionViewLayoutAttributes()
-        (attributes, placeholderAttributes) = layoutAttributesForSupplementaryView(at: indexPath, ofKind: JZSupplementaryViewKinds.placeholderCell, withItemCache: placeholderAttributes)
-        attributes.frame = frame
-        attributes.alpha = 0.7
-        attributes.zIndex = zIndexForElementKind(JZSupplementaryViewKinds.placeholderCell)
-    }
-    
 }
 
 // MARK: - Row header divider

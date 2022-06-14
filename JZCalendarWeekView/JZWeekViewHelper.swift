@@ -15,7 +15,7 @@ public enum JZSupplementaryViewKinds {
     public static let eventCell = "eventCell"
     public static let currentTimeline = "currentTimeline"
     public static let calendarBlockCell = "calendarBlockCell"
-    public static let placeholderCell = JZPlaceholderEvent.className
+    public static let placeholderCell = "placeholderCell"
 }
 
 public enum JZDecorationViewKinds {
