@@ -15,7 +15,8 @@ public enum JZCalendarReloadOption {
          layout(JZWeekViewFlowLayout?),
          events([Date: [JZBaseEvent]]?),
          numberOfResources(Int),
-         mode(JZCalendarMode)
+         mode(JZCalendarMode),
+         timelineRange(TimelineConfiguration.TimelineType)
 }
 
 public enum JZCalendarMode: Int {

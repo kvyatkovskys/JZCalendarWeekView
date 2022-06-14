@@ -214,6 +214,9 @@ open class JZBaseWeekView: UIView {
                 numOfResources = number
             case .mode(let mode):
                 viewMode = mode
+            case .timelineRange(let type):
+                timelineRange = type
+                updateFlowLayout(flowLayout)
             }
         }
     }
