@@ -38,7 +38,7 @@
 		8EC8A46C209999A2002C7634 /* LongPressEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EC8A46A209999A2002C7634 /* LongPressEventCell.xib */; };
 		8EE28FBF20882DE900C69A77 /* JZCalendarWeekView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE28FBB20882D7A00C69A77 /* JZCalendarWeekView.framework */; };
 		8EE28FC020882DE900C69A77 /* JZCalendarWeekView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE28FBB20882D7A00C69A77 /* JZCalendarWeekView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F956152B283E1D240005DD6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F956152A283E1D240005DD6F /* SnapKit */; };
+		F9CA9C8B28588331000E295E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F9CA9C8A28588331000E295E /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,7 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EE28FBF20882DE900C69A77 /* JZCalendarWeekView.framework in Frameworks */,
-				F956152B283E1D240005DD6F /* SnapKit in Frameworks */,
+				F9CA9C8B28588331000E295E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +265,7 @@
 			);
 			name = JZCalendarWeekViewExample;
 			packageProductDependencies = (
-				F956152A283E1D240005DD6F /* SnapKit */,
+				F9CA9C8A28588331000E295E /* SnapKit */,
 			);
 			productName = JZCalendarViewExample;
 			productReference = 8E5BB3CE2072F4A000FA853F /* JZCalendarWeekViewExample.app */;
@@ -298,7 +298,7 @@
 			);
 			mainGroup = 8E5BB3C52072F4A000FA853F;
 			packageReferences = (
-				F9561529283E1D240005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F9CA9C8928588331000E295E /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 8E5BB3CF2072F4A000FA853F /* Products */;
 			projectDirPath = "";
@@ -587,7 +587,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F9561529283E1D240005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		F9CA9C8928588331000E295E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -598,9 +598,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F956152A283E1D240005DD6F /* SnapKit */ = {
+		F9CA9C8A28588331000E295E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F9561529283E1D240005DD6F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = F9CA9C8928588331000E295E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

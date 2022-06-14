@@ -12,6 +12,7 @@ open class JZBaseEvent: NSObject, NSCopying {
     /// Unique id for each event to identify an event, especially for cross-day events
     public var id: String
     public var isPlaceholder: Bool = false
+    public var isCalendarBlock: Bool = false
     public var startDate: Date
     public var endDate: Date
 
@@ -24,6 +25,7 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var appointmentRequest: Any?
     public var appointment: Any?
     public var status: Any?
+    public var zIndex: Int = 0
     
     public var isAppointmentRequestItemEvent: Bool {
         appointmentRequest != nil

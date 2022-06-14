@@ -164,6 +164,7 @@
 				8E023C83206C732300C523BE /* JZBaseEvent.swift */,
 				8E40B2DF20B65C4600FFEB68 /* JZAllDayEvent.swift */,
 				8E1BA969206B5350007BE13C /* JZWeekViewHelper.swift */,
+				F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */,
 				8E1BA95C206B4AD9007BE13C /* ReusableViews */,
 				8E1BA955206B4687007BE13C /* Utils */,
 				8E1BA94D206B4329007BE13C /* JZCalendarWeekView.h */,
@@ -191,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				8E1BA95F206B4B84007BE13C /* JZColumnHeader.swift */,
-				F9561536283E21330005DD6F /* JZPlaceholderEvent.swift */,
 				F9561534283E1F9B0005DD6F /* JZOutsideCellDecorationView.swift */,
 				8E1BA961206B4B99007BE13C /* JZRowHeader.swift */,
 				8E1BA963206B4E82007BE13C /* JZCornerHeader.swift */,

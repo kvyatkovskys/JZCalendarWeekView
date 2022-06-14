@@ -148,12 +148,11 @@ open class JZBaseWeekView: UIView {
     /// Override this function to customise items, supplimentaryViews and decorationViews
     open func registerViewClasses() {
         // supplementary
-        self.collectionView.registerSupplimentaryViews([JZColumnHeader.self,
-                                                        JZCornerHeader.self,
-                                                        JZRowHeader.self,
-                                                        JZAllDayHeader.self,
-                                                        JZPlaceholderEvent.self])
-
+        collectionView.registerSupplimentaryViews([JZColumnHeader.self,
+                                                   JZCornerHeader.self,
+                                                   JZRowHeader.self,
+                                                   JZAllDayHeader.self])
+        
         // decoration
         flowLayout.registerDecorationViews([JZColumnHeaderBackground.self, JZRowHeaderBackground.self,
                                             JZAllDayHeaderBackground.self, JZAllDayCorner.self])
@@ -532,19 +531,29 @@ open class JZBaseWeekView: UIView {
         return yearMonthDay.set(hour: time.hour, minute: time.minute, second: 0)
     }
     
+    // Override if needed in subclass
     open func collectionView(_ collectionView: UICollectionView, colorForOutsideScreenDecorationViewAt indexPath: IndexPath) -> UIColor? {
-        // Override if needed in subclass
-        return nil
+        nil
     }
     
+    // Override if needed in subclass
     open func collectionView(_ collectionView: UICollectionView, restrictedAreasFor section: Int, resourceIndex: Int) -> Set<RestrictedArea>? {
-        // Override if needed in subclass
-        return nil
+        nil
     }
     
+    // Override if needed in subclass
     open func collectionView(_ collectionView: UICollectionView, numberOfRestrictedLinesIn section: Int) -> Int {
-        // Override if needed in subclass
-        return 0
+        0
+    }
+    
+    // Override if needed in subclass
+    public func collectionView(_ collectionView: UICollectionView, layout: JZWeekViewFlowLayout, zIndexForItemAtIndexPath indexPath: IndexPath) -> Int {
+        let date = flowLayout.dateForColumnHeader(at: indexPath)
+        if let events = allEventsBySection[date], let event = events[safe: indexPath.item] {
+            return event.zIndex
+        } else {
+            return 1
+        }
     }
     
 }
@@ -554,7 +563,7 @@ extension JZBaseWeekView: UICollectionViewDataSource {
     
     // In order to keep efficiency, only 3 pages exist at the same time, previous-current-next
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3 * numOfDays
+        3 * numOfDays
     }
 
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -575,10 +584,6 @@ extension JZBaseWeekView: UICollectionViewDataSource {
         var view = UICollectionReusableView()
 
         switch kind {
-        case JZSupplementaryViewKinds.placeholderEvent:
-            if let placeholder = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as? JZPlaceholderEvent {
-                view = placeholder
-            }
         case JZSupplementaryViewKinds.columnHeader:
             if let columnHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as? JZColumnHeader {
                 columnHeader.updateView(date: flowLayout.dateForColumnHeader(at: indexPath))
@@ -716,7 +721,7 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
     /// Load the page after horizontal scroll action.
     ///
     /// Can be overridden to do some operations before reload.
-    open func loadPage() {
+    public func loadPage() {
         // It means collectionView is scrolling back to previous contentOffsetX or It is vertical scroll
         // Each scroll should always start from the middle, which is contentViewWidth
         if collectionView.contentOffset.x == contentViewWidth { return }
@@ -759,7 +764,7 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
 extension JZBaseWeekView {
 
     /// Get the section Type current timeline
-    open func getSectionTypeCurrentTimeline(timeline: JZCurrentTimelineSection, indexPath: IndexPath) -> UICollectionReusableView {
+    public func getSectionTypeCurrentTimeline(timeline: JZCurrentTimelineSection, indexPath: IndexPath) -> UICollectionReusableView {
         let date = flowLayout.dateForColumnHeader(at: indexPath)
         timeline.isHidden = !date.isToday
         return timeline
@@ -767,7 +772,7 @@ extension JZBaseWeekView {
 
     /// Get the page Type current timeline
     /// Rules are quite confused for now
-    open func getPageTypeCurrentTimeline(timeline: JZCurrentTimelinePage, indexPath: IndexPath) -> UICollectionReusableView {
+    public func getPageTypeCurrentTimeline(timeline: JZCurrentTimelinePage, indexPath: IndexPath) -> UICollectionReusableView {
         let date = flowLayout.dateForColumnHeader(at: indexPath)
         let daysToToday = Date.daysBetween(start: date, end: Date(), ignoreHours: true)
         timeline.isHidden = abs(daysToToday) > numOfDays - 1
@@ -888,11 +893,18 @@ extension JZBaseWeekView: WeekViewFlowLayoutDelegate {
     // TODO: Only used when multiple cell types are used and need different overlap rules => layoutItemsAttributes
     public func collectionView(_ collectionView: UICollectionView, layout: JZWeekViewFlowLayout, cellTypeForItemAtIndexPath indexPath: IndexPath) -> String {
         let date = flowLayout.dateForColumnHeader(at: indexPath)
+
+        guard let events = allEventsBySection[date], let event = events[safe: indexPath.item] else {
+            return JZSupplementaryViewKinds.eventCell
+        }
         
-        if let events = allEventsBySection[date], let event = events[safe: indexPath.item], event.isPlaceholder {
-            return JZSupplementaryViewKinds.placeholderEvent
+        if event.isPlaceholder {
+            return JZSupplementaryViewKinds.placeholderCell
+        } else if event.isCalendarBlock {
+            return JZSupplementaryViewKinds.calendarBlockCell
         } else {
             return JZSupplementaryViewKinds.eventCell
         }
     }
+    
 }

@@ -6,7 +6,7 @@
 //
 import UIKit
 
-open class JZPlaceholderEvent: UICollectionReusableView {
+open class JZPlaceholderEvent: UICollectionViewCell {
 
     public var didTap: (() -> Void)?
 
@@ -22,10 +22,6 @@ open class JZPlaceholderEvent: UICollectionReusableView {
 
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.apply(layoutAttributes)
     }
 
     @objc private func tapOnPlaceholder() {
