@@ -216,6 +216,12 @@ open class JZBaseWeekView: UIView {
                 viewMode = mode
             case .timelineRange(let type):
                 timelineRange = type
+                // Check the screen orientation when initialisation
+                JZWeekViewHelper.viewTransitionHandler(to: UIScreen.main.bounds.size,
+                                                       weekView: self,
+                                                       needRefresh: false)
+                layoutSubviews()
+                forceReload()
                 updateFlowLayout(flowLayout)
             }
         }
