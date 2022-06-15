@@ -13,6 +13,8 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var id: String
     public var isPlaceholder: Bool = false
     public var isCalendarBlock: Bool = false
+    public var isAppointment: Bool = false
+    public var isAppointmentRequest: Bool = false
     public var startDate: Date
     public var endDate: Date
 
@@ -22,15 +24,22 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var intraEndDate: Date
     /// index of selected provider
     public var resourceIndex: Int?
+    
+    @available(swift, deprecated, message: "Use the 'data' property instead this!")
     public var appointmentRequest: Any?
+    @available(swift, deprecated, message: "Use the 'data' property instead this!")
     public var appointment: Any?
+    
+    public var data: Any?
     public var status: Any?
     public var zIndex: Int = 0
     
+    @available(swift, deprecated, message: "Use the 'isAppointmentRequest' property instead this!")
     public var isAppointmentRequestItemEvent: Bool {
         appointmentRequest != nil
     }
     
+    @available(swift, deprecated, message: "Use the 'isAppointment' property instead this!")
     public var isAppointmentEvent: Bool {
         appointment != nil
     }
