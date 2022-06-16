@@ -430,11 +430,6 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             let itemMaxX = (itemMinX + (widthItem - (itemMargin.left + itemMargin.right))).toDecimal1Value()
             let itemMaxY = (endHourY + endMinuteY + calendarStartY - itemMargin.bottom).toDecimal1Value()
             
-//            if isPlaceholderEventForIndexPath(itemIndexPath) {
-//                layoutPlaceholderAttributes(frame: CGRect(x: itemMinX, y: itemMinY,
-//                                                          width: widthItem, height: divisionHeight),
-//                                            indexPath: itemIndexPath)
-//            } else
             if (itemMaxY - itemMinY) > 0 && itemMinY > 0 {
                 (attributes, itemAttributes) = layoutAttributesForCell(at: itemIndexPath, withItemCache: itemAttributes)
                 attributes.frame = CGRect(x: itemMinX, y: itemMinY,
@@ -1008,7 +1003,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     // MARK: - z index
-    open func zIndexForElementKind(_ kind: String, withOffset: Int = 10) -> Int {
+    open func zIndexForElementKind(_ kind: String, withOffset: Int = 1) -> Int {
         switch kind {
         case JZSupplementaryViewKinds.cornerHeader, JZDecorationViewKinds.allDayCorner:
             return minOverlayZ + 11
@@ -1037,7 +1032,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         case JZSupplementaryViewKinds.placeholderCell:
             return minCellZ + 10
         case JZSupplementaryViewKinds.calendarBlockCell:
-            return minCellZ + withOffset
+            return minBackgroundZ + withOffset + 1
         default:
             return minCellZ
         }
