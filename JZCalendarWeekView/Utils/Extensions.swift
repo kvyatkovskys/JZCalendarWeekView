@@ -194,6 +194,12 @@ public extension Date {
         return self.set(hour: 23, minute: 59, second: 59)
     }
     
+    static func daysBetween(start: Date, end: Date, ignoreHours: Bool) -> Int {
+        let startDate = ignoreHours ? start.startOfDay : start
+        let endDate = ignoreHours ? end.startOfDay : end
+        return Calendar.current.dateComponents([.day], from: startDate, to: endDate).day!
+    }
+    
 }
 
 extension Date {
@@ -230,12 +236,6 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
         return formatter.string(from: self)
-    }
-
-    static func daysBetween(start: Date, end: Date, ignoreHours: Bool) -> Int {
-        let startDate = ignoreHours ? start.startOfDay : start
-        let endDate = ignoreHours ? end.startOfDay : end
-        return Calendar.current.dateComponents([.day], from: startDate, to: endDate).day!
     }
 
     static let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second, .weekday]
