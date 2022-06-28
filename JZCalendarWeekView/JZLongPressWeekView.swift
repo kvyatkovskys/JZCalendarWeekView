@@ -401,7 +401,7 @@ extension JZLongPressWeekView: UIGestureRecognizerDelegate {
 
         let state = gestureRecognizer.state
         var currentMovingCell: UICollectionViewCell!
-
+        
         if isLongPressing == false {
             if let indexPath = collectionView.indexPathForItem(at: pointInCollectionView) {
                 // Can add some conditions for allowing only few types of cells can be moved
@@ -412,7 +412,8 @@ extension JZLongPressWeekView: UIGestureRecognizerDelegate {
             }
             isLongPressing = true
         }
-
+        guard currentMovingCell is JZLongPressEventCell else { return }
+        
         // The startDate of the longPressView (the date of top Y in longPressView)
         var longPressViewStartDate: Date!
 
