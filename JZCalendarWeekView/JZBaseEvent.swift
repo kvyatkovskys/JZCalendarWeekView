@@ -26,6 +26,7 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var resourceIndex: Int?
     public var isHiddenCalendarBlockTitle = false
     public var isHiddenCalendarBlockOptions = false
+    public var isDimmedCalendarBlock = false
     
     @available(swift, deprecated, message: "Use the 'data' property instead this!")
     public var appointmentRequest: Any?
