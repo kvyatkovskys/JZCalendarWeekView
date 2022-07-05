@@ -26,23 +26,23 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var resourceIndex: Int?
     public var isHiddenCalendarBlockTitle = false
     public var isHiddenCalendarBlockOptions = false
-    public var isDimmedCalendarBlock = false
+    public var isDimmed = false
     
-    @available(swift, deprecated, message: "Use the 'data' property instead this!")
+    @available(*, deprecated, message: "Use the 'data' property instead this!")
     public var appointmentRequest: Any?
-    @available(swift, deprecated, message: "Use the 'data' property instead this!")
+    @available(*, deprecated, message: "Use the 'data' property instead this!")
     public var appointment: Any?
     
-    public var data: Any?
+    public var data: SKEvent<Int>?
     public var status: Any?
     public var zIndex: Int = 0
     
-    @available(swift, deprecated, message: "Use the 'isAppointmentRequest' property instead this!")
+    @available(*, deprecated, message: "Use the 'isAppointmentRequest' property instead this!")
     public var isAppointmentRequestItemEvent: Bool {
         appointmentRequest != nil
     }
     
-    @available(swift, deprecated, message: "Use the 'isAppointment' property instead this!")
+    @available(*, deprecated, message: "Use the 'isAppointment' property instead this!")
     public var isAppointmentEvent: Bool {
         appointment != nil
     }
@@ -79,5 +79,11 @@ public extension JZBaseEvent {
             return UIColor(hexString: "#fdfec8")
         }
     }
+    
+}
+
+public struct SKEvent<T> {
+    
+    let data: T
     
 }
