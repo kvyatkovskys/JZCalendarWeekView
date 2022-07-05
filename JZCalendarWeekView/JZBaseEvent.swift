@@ -36,6 +36,7 @@ open class JZBaseEvent: NSObject, NSCopying {
     public var data: Any?
     public var status: Any?
     public var zIndex: Int = 0
+    public var providerId: Int?
     
     @available(*, deprecated, message: "Use the 'isAppointmentRequest' property instead this!")
     public var isAppointmentRequestItemEvent: Bool {
