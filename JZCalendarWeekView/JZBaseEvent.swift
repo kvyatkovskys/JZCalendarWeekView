@@ -33,7 +33,6 @@ open class JZBaseEvent: NSObject, NSCopying {
     @available(*, deprecated, message: "Use the 'data' property instead this!")
     public var appointment: Any?
     
-    public var newData: SKEvent<SKEventData>?
     public var data: Any?
     public var status: Any?
     public var zIndex: Int = 0
@@ -67,6 +66,12 @@ open class JZBaseEvent: NSObject, NSCopying {
     }
 }
 
+open class SKBaseEvent<T>: JZBaseEvent {
+    
+    public var newData: SKEvent<T>?
+    
+}
+
 public extension JZBaseEvent {
     
     var stubImage: UIImage? {
@@ -85,11 +90,27 @@ public extension JZBaseEvent {
 
 public struct SKEvent<T> {
     
-    let data: T
+    public var data: T
+    
+    public var isHiddenCalendarBlockTitle: Bool = false
+    
+    public var isHiddenCalendarBlockOptions: Bool = false
+    
+    public var isDimmed: Bool = false
+    
+    public var zIndex: Int = 0
+
+}
+
+public protocol SKEventContainer {
+    
+    associatedtype Model = SKEventData
+    
+    var container: Model { get set }
     
 }
 
-public protocol SKEventData: AnyObject {
+public protocol SKEventData {
     
     var isHiddenCalendarBlockTitle: Bool { get set }
     var isHiddenCalendarBlockOptions: Bool { get set }
