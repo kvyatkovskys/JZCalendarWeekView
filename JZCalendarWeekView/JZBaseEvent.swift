@@ -68,7 +68,7 @@ open class JZBaseEvent: NSObject, NSCopying {
 
 open class SKBaseEvent<T>: JZBaseEvent {
     
-    public var newData: SKEvent<T>?
+    public var newData: T?
     
 }
 
@@ -85,36 +85,5 @@ public extension JZBaseEvent {
             return UIColor(hexString: "#fdfec8")
         }
     }
-    
-}
-
-public struct SKEvent<T> {
-    
-    public var data: T
-    
-    public var isHiddenCalendarBlockTitle: Bool = false
-    
-    public var isHiddenCalendarBlockOptions: Bool = false
-    
-    public var isDimmed: Bool = false
-    
-    public var zIndex: Int = 0
-
-}
-
-public protocol SKEventContainer {
-    
-    associatedtype Model = SKEventData
-    
-    var container: Model { get set }
-    
-}
-
-public protocol SKEventData {
-    
-    var isHiddenCalendarBlockTitle: Bool { get set }
-    var isHiddenCalendarBlockOptions: Bool { get set }
-    var isDimmed: Bool { get set }
-    var zIndex: Int { get set }
     
 }
