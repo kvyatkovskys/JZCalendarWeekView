@@ -64,6 +64,10 @@ class LongPressViewController: UIViewController {
 }
 
 extension LongPressViewController: JZBaseViewDelegate {
+    func didSwipePage(_ value: Int, weekView: JZBaseWeekView) {
+        print(value)
+    }
+
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) {
         updateNaviBarTitle()
     }

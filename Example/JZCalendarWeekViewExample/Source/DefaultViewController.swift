@@ -57,6 +57,10 @@ class DefaultViewController: UIViewController {
 }
 
 extension DefaultViewController: JZBaseViewDelegate {
+    func didSwipePage(_ value: Int, weekView: JZBaseWeekView) {
+        
+    }
+
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) {
         updateNaviBarTitle()
     }

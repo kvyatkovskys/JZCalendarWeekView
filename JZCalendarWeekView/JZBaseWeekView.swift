@@ -15,13 +15,13 @@ public protocol JZBaseViewDelegate: AnyObject {
     ///   - weekView: current JZBaseWeekView
     ///   - initDate: the new value of initDate
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date)
-    func didChangeCurrentDate(_ date: Date, weekView: JZBaseWeekView)
+    func didSwipePage(_ value: Int, weekView: JZBaseWeekView)
 }
 
 extension JZBaseViewDelegate {
     // Keep it optional
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) {}
-    func didChangeCurrentDate(_ date: Date, weekView: JZBaseWeekView) {}
+    func didSwipePage(_ value: Int, weekView: JZBaseWeekView) {}
 }
 
 open class JZBaseWeekView: UIView {
@@ -120,7 +120,6 @@ open class JZBaseWeekView: UIView {
     internal var scrollableEdges: (leftX: CGFloat?, rightX: CGFloat?)
     
     public var minimalSubSectionWidth: CGFloat?
-    public var currentDate = Date()
     private var viewMode: JZCalendarMode = .day
 
     override public init(frame: CGRect) {
@@ -251,7 +250,6 @@ open class JZBaseWeekView: UIView {
                             visibleTime: Date = Date(),
                             forceUpdateFirstDayOfWeek: Bool = false,
                             scrollableRange: (startDate: Date?, endDate: Date?)? = (nil, nil)) {
-        currentDate = setDate
         self.numOfDays = numOfDays
         if numOfDays == 7 || forceUpdateFirstDayOfWeek {
             updateFirstDayOfWeek(setDate: setDate, firstDayOfWeek: firstDayOfWeek)
@@ -382,7 +380,6 @@ open class JZBaseWeekView: UIView {
     /// - Parameters:
     ///    - date: this date is the current date in one-day view rather than initDate
     open func updateWeekView(to date: Date, scrollToTime: Bool = false) {
-        currentDate = date
         initDate = date.startOfDay.add(component: .day, value: -numOfDays)
         
         DispatchQueue.main.async { [weak self] in
@@ -764,8 +761,7 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
 
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
-        currentDate = currentDate.add(component: .day, value: addValue)
-        baseDelegate?.didChangeCurrentDate(currentDate, weekView: self)
+        baseDelegate?.didSwipePage(addValue, weekView: self)
         initDate = initDate.add(component: .day, value: addValue)
         forceReload()
     }
