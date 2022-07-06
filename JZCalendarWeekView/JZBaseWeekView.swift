@@ -15,11 +15,13 @@ public protocol JZBaseViewDelegate: AnyObject {
     ///   - weekView: current JZBaseWeekView
     ///   - initDate: the new value of initDate
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date)
+    func didChangeCurrentDate(_ date: Date, weekView: JZBaseWeekView)
 }
 
 extension JZBaseViewDelegate {
     // Keep it optional
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) {}
+    func didChangeCurrentDate(_ date: Date, weekView: JZBaseWeekView) {}
 }
 
 open class JZBaseWeekView: UIView {
@@ -739,8 +741,8 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
 
     // sectionScroll load page
     private func loadPageSectionScroll() {
-        let currentDate = getDateForContentOffsetX(collectionView.contentOffset.x)
-        let currentInitDate = currentDate.add(component: .day, value: -numOfDays)
+        let newDate = getDateForContentOffsetX(collectionView.contentOffset.x)
+        let currentInitDate = newDate.add(component: .day, value: -numOfDays)
         self.initDate = currentInitDate
         self.forceReload()
     }
@@ -763,6 +765,7 @@ extension JZBaseWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlow
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
         currentDate = currentDate.add(component: .day, value: addValue)
+        baseDelegate?.didChangeCurrentDate(currentDate, weekView: self)
         initDate = initDate.add(component: .day, value: addValue)
         forceReload()
     }
