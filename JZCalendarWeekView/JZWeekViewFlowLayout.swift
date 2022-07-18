@@ -1020,7 +1020,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         case JZDecorationViewKinds.columnHeaderBackground:
             return minOverlayZ + 5
         case JZSupplementaryViewKinds.currentTimeline:
-            return minOverlayZ + 12
+            return minOverlayZ + 4
         case JZDecorationViewKinds.horizontalGridline:
             return minBackgroundZ + 3
         case JZDecorationViewKinds.verticalGridline:
