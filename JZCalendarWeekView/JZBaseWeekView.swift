@@ -110,9 +110,11 @@ open class JZBaseWeekView: UIView {
     private var isFirstAppear: Bool = true
     public var isAllDaySupported: Bool = false
     private var isEnabledHorizontalScrolling: Bool {
-        guard viewMode == .week else { return true }
-        
-        return numOfDays == 7
+        // horizontal scrolling is disabled temporary
+        false
+//        guard viewMode == .week else { return true }
+//
+//        return numOfDays == 7
     }
     internal var scrollDirection: ScrollDirection?
 
